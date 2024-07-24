@@ -1,12 +1,12 @@
 {
   "basics": {
-    "name": "Albert Einstein",
-    "label": "Scientist",
+    "name": "Shamanth Kuthpadi Seethakantha",
+    "label": "",
     "image": "",
-    "email": "albert@einstein.de",
-    "phone": "(912) 123-4567",
-    "url": "https://alshedivat.github.io/al-folio/",
-    "summary": "A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time",
+    "email": "skuthpadi@umass.edu",
+    "phone": "",
+    "url": "https://shamanth-kuthpadi.github.io",
+    "summary": "A student at the University of Massachusetts Amherst pursuing a Bachelors of Science degree in Computer Science.",
     "location": {
       "address": "2712 Broadway St",
       "postalCode": "CA 94115",
