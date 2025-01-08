@@ -4,7 +4,9 @@
 
 body{
     background-color: hsl(0, 0%, 98%);
-    margin-bottom: 5%;
+    margin-bottom: 3%;
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
 a {
@@ -29,21 +31,22 @@ h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: hsl(221, 39%, 11%);
+    /* background-color: hsl(221, 39%, 11%); */
     margin-bottom: 20px;
     height: 3.5em;
 }
 
 .navbar .navbar-elem {
     margin: 10px;
-    font-size: 18px;
+    font-size: 20px;
     text-decoration: none;
-    color: hsl(0, 0%, 90%);
+    color: hsl(0, 0%, 0%);
     font-weight: 500;
 }
 
 .navbar .navbar-elem:hover {
     background-color: hsl(221, 45%, 47%);
+    color: hsl(0, 0%, 98%);
     padding: 10px;
 }
 
@@ -62,8 +65,8 @@ h4 {
 /* About */
 
 .about {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .container {
@@ -81,7 +84,7 @@ h4 {
 .para {
     width: 60%;
     text-align: justify;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 h1{
@@ -106,6 +109,8 @@ p {
     justify-content: space-between;
     align-items: flex-start;
     margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 1%;
     border-style: solid;
     border-color: hsl(0, 0%, 70%);
     border-radius: 10px;
@@ -127,22 +132,23 @@ p {
 }
 
 .experience-card .experience-card-title {
-    font-style: italic;
+    font-weight: 600;
 }
 
 .experience-card .experience-card-date {
-    font-size: small;
+    font-size: smaller;
 }
 
 .experience-card .experience-card-desc {
     margin-top: 10px;
+    font-size: 15px;
 }
 
 
 /* Contact */
 .contact {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .header h1 {
@@ -214,8 +220,8 @@ p {
 /* Project */
 
 .project {
-    margin-left: 5%;
-    margin-right: 5%
+    margin-left: 15%;
+    margin-right: 15%
 }
 
 .projectcards {
@@ -308,12 +314,12 @@ p {
   padding: 1rem;
   background-color: #f8f9fa; /* Light gray background */
   border-top: 1px solid #ddd;
+  margin-top: 1%;
 }
 
 .footer-icons {
   display: flex;
   gap: 1.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .footer-icons a {

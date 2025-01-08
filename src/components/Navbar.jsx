@@ -5,7 +5,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-left">
         <Link className="navbar-elem" to="/">
-          Shamanth Kuthpadi
+          shamanth kuthpadi
         </Link>
       </div>
       <div className="navbar-right">
@@ -18,6 +18,14 @@ function Navbar() {
         <Link className="navbar-elem" to="/contact">
           contact
         </Link>
+        <a
+          className="navbar-elem"
+          href="https://drive.google.com/file/d/1xLb4kvgFkh25lIZgvurpjbBDnMKbsQoJ/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          cv
+        </a>
       </div>
     </nav>
   );
