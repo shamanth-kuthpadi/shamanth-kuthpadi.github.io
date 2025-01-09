@@ -15,10 +15,10 @@ a {
 }
 
 .header {
-    background-color: hsl(0, 0%, 90%);
+    /* background-color: hsla(0, 0%, 90%, 0.322); */
     margin-bottom: 5%;
     border-radius: 10px;
-    padding: 3%;
+    padding: 0.5%;
 }
 
 h4 {
@@ -111,12 +111,13 @@ p {
     margin-top: 1%;
     margin-left: 1%;
     margin-right: 1%;
-    border-style: solid;
-    border-color: hsl(0, 0%, 70%);
+    border: none;
     border-radius: 10px;
     padding: 20px;
     color: hsl(0, 0%, 20%);
-    background-color: hsl(0, 0%, 96%);
+    background-color: hsla(0, 3%, 83%, 0.37);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add smooth interaction */
 }
 
 .experience-card a {
