@@ -72,7 +72,7 @@ function Projects() {
         <div className="header">
           <h1>
             <TypingEffect
-              text={["Projects I Have Worked On ."]}
+              text={["projects i have worked on."]}
               speed={100}
               eraseSpeed={50}
               eraseDelay={2000}

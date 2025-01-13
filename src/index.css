@@ -340,3 +340,22 @@ p {
   margin: 0;
 }
 
+/* Blog */
+
+.blog {
+    margin-left: 15%;
+    margin-right: 15%
+}
+
+.article {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+    color: hsl(0, 0%, 20%);
+}
+
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  display: block; /* Ensures no extra spacing under images */
+}

@@ -15,9 +15,6 @@ function Navbar() {
         <Link className="navbar-elem" to="/projects">
           projects
         </Link>
-        <Link className="navbar-elem" to="/contact">
-          contact
-        </Link>
         <a
           className="navbar-elem"
           href="https://drive.google.com/file/d/1xLb4kvgFkh25lIZgvurpjbBDnMKbsQoJ/view?usp=sharing"
@@ -26,6 +23,12 @@ function Navbar() {
         >
           cv
         </a>
+        <Link className="navbar-elem" to="/blog">
+          blog
+        </Link>
+        <Link className="navbar-elem" to="/contact">
+          contact
+        </Link>
       </div>
     </nav>
   );

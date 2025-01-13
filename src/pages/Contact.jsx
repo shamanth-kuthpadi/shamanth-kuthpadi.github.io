@@ -35,7 +35,7 @@ function Contact() {
         <div className="header">
           <h1>
             <TypingEffect
-              text={["Get in Touch."]}
+              text={["get in touch."]}
               speed={100}
               eraseSpeed={50}
               eraseDelay={2000}

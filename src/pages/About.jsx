@@ -14,7 +14,7 @@ function About() {
           <div className="header">
             <h1>
               <TypingEffect
-                text={["About ."]}
+                text={["about."]}
                 speed={100}
                 eraseSpeed={50}
                 eraseDelay={2000}

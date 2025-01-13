@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Projects from "./pages/Projects.jsx";
+import Blog from "./pages/Blog.jsx";
 import Footer from "./components/Footer.jsx";
-
 import Navbar from "./components/Navbar.jsx";
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
               />
             }
           />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
         <Footer />
       </Router>
