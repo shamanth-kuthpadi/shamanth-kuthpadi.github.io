@@ -108,16 +108,16 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 1%;
+    margin-top: 3%;
     margin-left: 1%;
     margin-right: 1%;
     border: none;
     border-radius: 10px;
     padding: 20px;
     color: hsl(0, 0%, 20%);
-    background-color: hsla(0, 3%, 83%, 0.37);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.06); /* Subtle shadow */
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add smooth interaction */
+    background-color: hsla(0, 8%, 79%, 0.37);
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1), 1px 1px 3px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+    transition: transform 0.1s ease, box-shadow 0.1s ease; /* Add smooth interaction */
 }
 
 .experience-card a {
@@ -358,4 +358,20 @@ p {
   max-width: 100%;
   height: auto;
   display: block; /* Ensures no extra spacing under images */
+}
+
+.math {
+  display: inline;
+  font-style: italic;
+}
+
+.math.display {
+  display: block;
+  margin: 1em 0;
+  text-align: center;
+}
+
+.csl-entry {
+    margin-bottom: 10px;
+    margin-left: 10px;
 }

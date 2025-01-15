@@ -6,10 +6,26 @@ import Projects from "./pages/Projects.jsx";
 import Blog from "./pages/Blog.jsx";
 import Footer from "./components/Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
+import { MathJaxContext, MathJax } from "better-react-mathjax";
+
+const config = {
+  loader: { load: ["[tex]/html"] },
+  tex: {
+    packages: { "[+]": ["html"] },
+    inlineMath: [
+      ["$", "$"],
+      ["\\(", "\\)"],
+    ],
+    displayMath: [
+      ["$$", "$$"],
+      ["\\[", "\\]"],
+    ],
+  },
+};
 
 function App() {
   return (
-    <>
+    <MathJaxContext version={3} config={config}>
       <Router>
         <Navbar />
         <Routes>
@@ -25,11 +41,18 @@ function App() {
               />
             }
           />
-          <Route path="/blog" element={<Blog />} />
+          <Route
+            path="/blog"
+            element={
+              <MathJax hideUntilTypeset={"first"}>
+                <Blog />
+              </MathJax>
+            }
+          />
         </Routes>
         <Footer />
       </Router>
-    </>
+    </MathJaxContext>
   );
 }
 

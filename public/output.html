@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Structural Brain Connectomes</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Structural Brain Connectomes</h1>
+</header>
+<div class="center">
+<p><span><strong>Modeling &amp; Analyzing Structural Brain
+Connectomes</strong></span><br />
+Shamanth Kuthpadi<br />
+Advisor: Cameron Musco<br />
+<em>University of Massachusetts Amherst</em></p>
+</div>
+<hr />
+<p><strong>Abstract</strong> <br />
+This independent study aimed to explore the intersection of machine
+learning (ML) models, structural brain connectomes, and spectral graph
+theory. A significant challenge in this study was obtaining access to
+raw brain data. Many institutions with rights to the desired datasets
+either denied our requests or required specialized permissions from the
+National Institute of Mental Health Data Archive (NDA). To overcome this
+limitation, we utilized pre-processed connectomic data kindly provided
+by Kerepesi et al. Using this data, we visualized and analyzed brain
+connectomes, ultimately developing a classifier capable of mapping
+node-level features to specific brain regions. A binary classifier
+achieved 94% accuracy for hemisphere classification, while a multi-class
+model reached 50% accuracy for cortical structure identification. We
+also demonstrated that the Fiedler vector alone can classify hemispheres
+with an accuracy exceeding 99%. This study highlights the utility of
+spectral graph theory in understanding brain structure and offers
+avenues for future research using generative models and additional
+datasets.</p>
+<hr />
+<h1 id="introduction">Introduction</h1>
+<h2 id="motivation">Motivation</h2>
+<p>Understanding the human brain’s connectivity is crucial for
+diagnosing neurodevelopmental disorders, brain injuries, and
+neurological diseases. Structural brain connectomes represent the
+physical pathways of the brain and can reveal patterns of organization
+that correlate with cognitive function or dysfunction. Advances in
+spectral graph theory and machine learning have allowed for significant
+progress in understanding these networks. This study leverages graph
+theoretic techniques and ML to analyze connectomes and build predictive
+models that classify brain regions based on connectivity features.</p>
+<h2 id="objective">Objective</h2>
+<p>In this study, our main objective was to understand how well we can
+distinguish between brain regions using spectral features of the
+Laplacian of a connectome network. For now, we have utilized the
+eigenvectors of the Laplacian to classify brain hemispheres and major
+cortical structures. However, we hope that leveraging spectral features
+could allow us to identify even more local brain structures/regions that
+can then be used to annotate brain-induced graph networks. Tools like
+FreeSurfer (used by Kerepesi et al.) use probabilistic approaches that
+heavily rely on pre-defined templates to label brain regions. However,
+it has been shown that machine learning (i.e. FastSurfer via
+convolutional neural network <span class="citation"
+data-cites="henschelFastSurferFastAccurate2020">(Henschel et al.
+2020)</span>) approaches can be much faster and just as reliable in
+labeling the same regions. Our work aims to propose an alternative to
+FreeSurfer’s segmentation procedure.</p>
+<h2 id="previous-work">Previous Work</h2>
+<p>Machine learning approaches to the analysis of connectomic data have
+been successful in highlighting connectomic differences between brains
+affected by neurodevelopmental disorders and Tardive dyskinesia (TD)
+brains. Previous work in this area has shown that patients with a
+variety of neurodevelopmental disorders are alike in that their
+connectomes lack the presence of highly interconnected “hubs” that are
+easily found in TD brains <span class="citation"
+data-cites="siugzdaite2020transdiagnostic">(Siugzdaite et al.
+2020)</span>. These positive and interesting insights indicate that
+machine learning methods can elucidate connectomic correlates of brain
+functions and dysfunction not known previously, such as these hubs.</p>
+<p>Abdelnour et al. demonstrated a novel approach to predict functional
+brain connectivity (FC) from structural connectivity (SC) using the
+eigenstructure of the structural Laplacian. They derived an analytical
+model showing that SC and FC share eigenvectors, with their eigenvalues
+exhibiting an exponential relationship. This model efficiently
+reconstructs FC matrices using only a small number of Laplacian
+eigenmodes, outperforming traditional generative models that rely on
+time-consuming neural simulations <span class="citation"
+data-cites="abdelnourFunctionalBrainConnectivity2018">(Abdelnour et al.
+2018)</span>. Their findings highlight the utility of spectral graph
+theory in understanding the structure-function relationship in the brain
+and provide a mechanistic framework for deriving FC from SC using
+closed-form solutions.</p>
+<h2 id="data">Data</h2>
+<p>We first attempted to utilize raw brain data but there were two main
+issues that we faced:</p>
+<ol>
+<li><p>We needed to formulate a pipeline to convert raw brain
+diffusion-weighted images to useable connectome networks. To do so, we
+turned to MRtrix3. However, MRtrix3 requires highly specific imaging
+conditions, including a consistent acquisition protocol for diffusion
+MRI sequences, which can vary across datasets. Furthermore, the pipeline
+for converting raw DWI data into usable connectome networks relies on
+accurate brain masking, fiber tractography, and parcellation steps. Each
+of these steps introduces potential sources of error, such as noise in
+the diffusion data, inaccuracies in identifying fiber pathways, or
+inconsistencies in parcellating brain regions.</p></li>
+<li><p>While there were example raw brain images, we were not able to
+obtain access to full raw brain data. Many of the institutions that
+reserved the right to the datasets either outright denied our requests
+or required special permissions.</p></li>
+</ol>
+<p>Instead, we turned to work done by the organizers of BrainGraph.org.
+Kerepesi et al. constructed structural connectomes that were processed
+from the Human Connectome Project (HCP) - one of the datasets that we
+hoped to gain access to. These connectomes were then formatted as
+GraphML files that included nodes, edges, and their attributes <span
+class="citation"
+data-cites="kerepesiBraingraphorgDatabaseHigh2017">(Kerepesi et al.
+2017)</span>. On BrainGraph.org there are many different versions but
+the one used for this study is called <em>1015 nodes set, 1064 brains,
+1,000,000 streamlines, 10x repeated &amp; averaged</em>.</p>
+<p>After downloading the dataset, we then proceeded to read in the
+GraphMl files as NumPy/SciPy matrices and NetworkX graphs. The goal here
+was to create useable formats of the connectomes for further analysis in
+Python.</p>
+<h2 id="visualization">Visualization</h2>
+<p>Each edge contained a <em>FA_mean</em> attribute that represented the
+fractional anisotropy mean between two nodes. We considered the
+<em>FA_mean</em> to be the edge weights in the graph network.</p>
+<figure>
+<img src="/media/diagrams/sub100206_connectome_net.png" />
+<figcaption>Example of a graph network for a given structural
+connectome. Nodes are blue and the edges are on a color scale mapping
+the <em>FA_mean</em>.</figcaption>
+</figure>
+<h1 id="methodology">Methodology</h1>
+<h2 id="preprocessing">Preprocessing</h2>
+<p>Firstly, we did not want isolated nodes (nodes with degree = 0) to
+impact or bias our downstream analysis. Hence, those nodes were removed
+from the graph networks.</p>
+<p>We then gathered all of the structural connectomes and created a
+dataset with each row containing the features (centrality and spectral)
+for a given node. In other words, we extracted all the nodes and their
+features for a given structural connectome - we then did this for all
+the structural connectomes.</p>
+<p>Finally, we created a binary classifier that maps nodes to the
+hemisphere within the brain structure. We also created a multi-class
+classifier that maps nodes to specific brain regions within the brain
+cortex.</p>
+<h2 id="centrality-features">Centrality Features</h2>
+<p>In a network setting, such as ours, centrality measures are commonly
+extracted for nodes within the graph. In particular, we chose to
+use:</p>
+<ul>
+<li><p><strong>Degree Centrality.</strong> This is the most basic
+centrality measure and the easiest to calculate. As the name suggests,
+for a given node, the degree centrality is simply the degree of that
+node. The degree of a node is the number of edges that are incident to
+that node. For a directed graph, this measure is typically split into
+in-degree centrality and out-degree centrality where in-degree is the
+number of edges that are incoming and out-degree is the number of edges
+that are outgoing.</p>
+<p>So, for an undirected graph, the degree centrality for a node <span
+class="math inline">\(i\)</span> is: <span class="math display">\[d_i =
+\sum_{i=1}^N a_{ij}\]</span> where <span
+class="math inline">\(A\)</span> is the adjacency matrix with <span
+class="math inline">\(a_{ij}\)</span> being an element in the matrix
+corresponding to the relation between the <span
+class="math inline">\(i\)</span>th and <span
+class="math inline">\(j\)</span>th node <span class="citation"
+data-cites="salhiNetworkAnalysisHuman2023">(Salhi et al.
+2023)</span>.</p></li>
+<li><p><strong>Closeness Centrality.</strong> The closeness centrality
+of a node <span class="math inline">\(i\)</span> measures how "close"
+the node is to all other nodes in the graph. In particular, it is: <span
+class="math display">\[c_i = \frac{N-1}{\sum_{j\neq i} d(i, j)}\]</span>
+where <span class="math inline">\(N\)</span> is the number of nodes and
+<span class="math inline">\(j\)</span> is an arbitrary node (that is not
+the same as <span class="math inline">\(i\)</span>) in our graph.
+Intuitively, nodes with higher closeness centrality measures are closer
+to the "center" of the network.</p></li>
+<li><p><strong>Betweeness Centrality.</strong> Betweenness centrality is
+used as a measure to quantify how much control a node has during network
+flow. In other words, we want to check the number of times a node <span
+class="math inline">\(i\)</span> falls in the path of an arbitrary node
+<span class="math inline">\(j\)</span> and <span
+class="math inline">\(k\)</span>: <span class="math display">\[b_i =
+\frac{2}{(N-1)(N-2)} \sum_{i\neq j, i\neq k, j\neq k}
+\frac{\sigma_{jk}(i)}{\sigma_{jk}}\]</span> where <span
+class="math inline">\(N\)</span> is the number of nodes in the graph,
+<span class="math inline">\(\sigma_{jk}\)</span> is the number of paths
+from <span class="math inline">\(j\)</span> to <span
+class="math inline">\(k\)</span>, and <span
+class="math inline">\(\sigma_{jk}(i)\)</span> is the number of times
+that <span class="math inline">\(i\)</span> falls in their paths <span
+class="citation" data-cites="salhiNetworkAnalysisHuman2023">(Salhi et
+al. 2023)</span>.</p></li>
+<li><p><strong>Eigenvector Centrality.</strong> Let <span
+class="math inline">\(v\)</span> be the eigenvector corresponding to the
+largest eigenvalue of the adjacency matrix <span class="citation"
+data-cites="salhiNetworkAnalysisHuman2023">(Salhi et al. 2023)</span>:
+<span class="math display">\[v = \frac{1}{\lambda} Av\]</span> wherein
+which each value of <span class="math inline">\(v\)</span> can be
+represented as: <span class="math display">\[v_i = \frac{1}{\lambda}
+\sum_{i=1}^N a_{ij}v_j\]</span> Influence propagation is a good way to
+gain some intuition behind why eigenvector centrality can be a powerful
+measure. A node that has a high eigenvector centrality is one that has
+influential neighbors. "Influence" refers to a node’s own centrality
+measure (typically this is degree centrality). In other words, a node
+could have the lowest degree centrality but the highest eigenvector
+centrality if its neighbors have high degree centrality. You can imagine
+that this process of analyzing the influence of a node’s neighbor can
+recurse or propagate to neighbors of neighbors and so on.</p></li>
+</ul>
+<p>So, for each node, we calculated the aforementioned centrality
+measures using NetworkX functionalities.</p>
+<h2 id="spectral-features">Spectral Features</h2>
+<p>For each of the structural connectomes, we found the corresponding
+un-weighted Laplacian matrix. Un-weighted in this case just refers to
+the fact that the adjacency matrix <span
+class="math inline">\(A\)</span> has binary values indicating the
+existence of an edge between two nodes. The Laplacian matrix can be
+represented as <span class="math display">\[L = D - A\]</span> where
+<span class="math inline">\(L\)</span> is our Laplacian matrix, <span
+class="math inline">\(D\)</span> is the degree matrix, and <span
+class="math inline">\(A\)</span> is our adjacency matrix. In the context
+of the Laplacian matrix, the eigenvectors corresponding to the smallest
+non-zero eigenvalues are informative. Hence, we chose the smallest <span
+class="math inline">\(k\)</span> eigenvectors <span
+class="math inline">\(v_{n-1},..., v_{n-k}\)</span> of <span
+class="math inline">\(L\)</span> and then represented each node by it’s
+corresponding row in <span class="math inline">\(V \in R^{n \times
+k}\)</span> <span class="citation" data-cites="muscoslides514F24">(Musco
+2024)</span>.</p>
+<p>To find the Laplacian matrix and the eigenspectra, we took advantage
+of functionalities within SciPy.</p>
+<p>To ensure that the eigenvectors would indeed be useful in downstream
+analysis, we decided to perform a few key tests (as seen in Figure 2 and
+Figure 3). The Fiedler vector has a clear transition zone in the middle
+indicating that it can be used to clearly cluster the nodes in the
+network. To confirm this, we also plotted the clusters that are formed
+by simply using the Fiedler vector on the average graph. We found that,
+just by visual analysis, it does a fantastic job of separating the left
+and right hemispheres. Consequently, we decided to utilize the spectral
+features during classification.</p>
+<figure>
+<div class="minipage">
+<img src="/media/diagrams/fiedler.png" />
+</div>
+<div class="minipage">
+<img src="/media/diagrams/spectranet2d.png" />
+</div>
+<figcaption>Each node is colored based on its respective value in the
+Fiedler vector. It is clear to see that the Fiedler vector is extremely
+informative when it comes to separating the brain into the left and
+right hemispheres</figcaption>
+</figure>
+<h2 id="model-selection">Model Selection</h2>
+<p>We made the empirical choice to use extreme gradient-boosted trees as
+our underlying model. Boosting is an excellent choice when minimizing
+bias and variance which can then lead to highly accurate models. They
+also can provide insights into the importance of individual features and
+this can be particularly useful when trying to gain intuition about the
+effectiveness of feature choices.</p>
+<p>The brain regions (labels) were encoded using Scikit-learn’s label
+encoder. The dataset was then split (stratified) into a training set
+(80%) and a testing set (20%). To utilize Extreme Gradient Boosting, we
+used the XGBClassifier library from the XGBoost Python package. The
+hyperparameters for the model were selected using stratified k-fold
+cross-validation in conjunction with a randomized search.</p>
+<h1 id="results">Results</h1>
+<figure>
+<img src="/media/diagrams/results.png" />
+<figcaption>The above are the performance results for the binary
+classifier and multi-class classifier for different numbers of
+eigenvectors.</figcaption>
+</figure>
+<p>The best binary classifier has an outstanding accuracy of 94%. The
+Laplacian eigenspectrum seemed to boost performance by a significant
+amount and we were able to validate this by analyzing the feature
+importance F-scores. On the other hand, the best multi-class classifier
+only has an accuracy of 50%. Inherently, the task is harder as there are
+many more classes (49 classes to be exact) to classify and so
+spectrum-identified clusters need to also be very precise.</p>
+<h2 id="discussion">Discussion</h2>
+<p>From the plot, we can observe several key characteristics:</p>
+<ul>
+<li><p>For the binary classifier, beyond 10 eigenvectors there wasn’t
+much change in accuracy. Whereas, for the multi-class classifier, there
+seems to be an increasing trend in performance as we increase the number
+of eigenvectors in the feature set past 20. This is probably due to the
+fact that lower eigenvectors (those corresponding to smaller
+eigenvalues) typically capture global structures, such as clusters or
+communities in the graph and higher eigenvectors capture finer,
+localized details in the graph. Hence, when detecting hemispheres we
+don’t need as many eigenvectors but for specific brain regions, we will
+need much higher eigenvectors.</p></li>
+<li><p>The importance of centrality measures fades away as the
+eigenvectors are introduced in the feature set. Maybe this is because
+centrality measures encode a node’s structural importance as a scalar
+but including feature space from the eigenspectra is a richer (because
+of the multiple dimensions) version.</p></li>
+</ul>
+<p>To confirm if the introduction of more eigenvectors (past 30) would
+improve the performance of the multi-class model, we included a total of
+100 eigenvectors in the feature space and measured the same
+statistics.</p>
+<figure>
+<img src="/media/diagrams/multiclasssaturation.png" />
+<figcaption>The above are the performance results for the multi-class
+classifier for different numbers of eigenvectors (up to
+100).</figcaption>
+</figure>
+<p>We can observe that our multi-class model saturates somewhere between
+50 and 70 eigenvectors. This saturation suggests that while the initial
+eigenvectors capture global structural information, higher-order
+eigenvectors may introduce redundancy or noise. Beyond a certain point,
+the additional eigenvectors no longer provide significant new
+information about the graph structure, as their contribution to
+distinguishing finer details becomes negligible. This aligns with the
+known property of Laplacian eigenvectors, where lower eigenvectors
+describe global patterns and higher ones capture localized nuances that
+may not always aid classification. As such, the best accuracy remains
+approximately 50 %.</p>
+<p>We also tried to weight the Laplacian and then extract the spectral
+features but this didn’t seem to help either. Weighted in this case just
+refers to the fact that the adjacency matrix <span
+class="math inline">\(A\)</span> has values indicating the weight of an
+edge between two nodes. The edge weights correspond to the fractional
+anisotropy mean between two nodes and so it could be that this is simply
+not giving us any useful information about the local structures of the
+brain.</p>
+<figure>
+<img src="/media/diagrams/laplacianweighted.png" />
+<figcaption>The above are the performance results for the multi-class
+classifier for different number of eigenvectors of the weighted
+Laplacian (up to 80).</figcaption>
+</figure>
+<h2 id="improving-the-binary-classifier">Improving the Binary
+Classifier</h2>
+<p>The Fiedler vector, corresponding to the second smallest eigenvalue
+of the Laplacian, naturally divides a graph into two partitions. This
+property stems from its role in minimizing the normalized graph cut,
+making it ideal for identifying large-scale structures like brain
+hemispheres. Since our Fiedler vector seems to be doing a very good job
+at separating the nodes in the network into the two hemispheres we aim
+to classify, we decided to just create our own classifier that only uses
+the Fiedler vector. In particular, we can leverage the fact that the
+second smallest eigenvector of the Laplacian partitions a network where
+positive values of the eigenvector correspond to one cluster and
+negative values correspond to the other cluster.</p>
+<p>By simply checking a condition to see if a node has a corresponding
+negative/positive value in the Fiedler vector we were able to classify
+nodes with an impressive accuracy of over 99%.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>Over the course of this independent study, we were able to delve into
+the realm of machine learning and graph theory in the context of
+structural brain connectomes. We took existing structural connectomes in
+the format of GraphML and visualized them as NetworkX networks. Using
+the newly formatted connectomes, we applied graph theoretic approaches
+to relate centrality measures to the roles of nodes in a biological
+setting. We then also performed basic computational operations in the
+realm of spectral analysis to get the Laplacian matrices, create
+symmetric matrices, and extract eigenvectors features. Finally, we used
+machine learning techniques to identify brain regions such as
+hemispheres and cortical structures.</p>
+<p>In regards to our results, the high accuracy of the binary classifier
+confirms the effectiveness of spectral graph theory for identifying
+large-scale brain structures. This finding has important implications
+for clinical and research applications. For instance, accurately
+identifying brain hemispheres based on connectivity could enhance
+automated brain mapping in neuroimaging pipelines, reducing manual
+effort and potential errors. In clinical settings, this accuracy could
+aid in detecting anomalies or asymmetries in brain structure associated
+with neurological disorders such as epilepsy, stroke, or
+neurodevelopmental conditions. On the other hand, all of our strategies
+to try and improve the accuracy of the multiclass classifier only
+produced a best accuracy of 94 %.</p>
+<h2 id="future-work">Future Work</h2>
+<ul>
+<li><p>Thus far, we have built two classifiers (1) a binary classifier
+to distinguish between hemispheres (2) a multi-class classifier to
+distinguish between more localized brain regions within the cortex.
+While the binary classifier does well, the multi-class classifier does
+not. We can try to dissect where the issue might be and whether
+identifying cortical regions is a much harder task than we previously
+anticipated.</p></li>
+<li><p>There are a myriad of generative models, and I would like to
+train a model so that it can generate a reasonable connectome network
+given some prior information about the structure. In other words, given
+sets of nodes and edges pertaining to clusters in a connectome network,
+can a generative model generate the rest of the network/cluster?
+Kerepesi et al. propose the <em>Brain Evolution Workflow</em>, maybe I
+could test the validity of this workflow <span class="citation"
+data-cites="kerepesiBraingraphorgDatabaseHigh2017">(Kerepesi et al.
+2017)</span>.</p></li>
+<li><p>There are many more versions of the structural connectome data
+that BrainGraph.org has made available. It would be interesting to
+conduct further analyses separately on these versions or even some
+combination of them.</p></li>
+<li><p>There is a lot of work being done to predict functional
+connectomes from structural connectomes using eigendecomposition and
+other various spectral methodologies. It would be interesting to see
+what the limitations of those methods are.</p></li>
+</ul>
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent"
+data-entry-spacing="0" role="list">
+<div id="ref-abdelnourFunctionalBrainConnectivity2018" class="csl-entry"
+role="listitem">
+Abdelnour, Farras, Michael Dayan, Orrin Devinsky, Thomas Thesen, and
+Ashish Raj. 2018. <span>“Functional Brain Connectivity Is Predictable
+from Anatomic Network’s <span>Laplacian</span> Eigen-Structure.”</span>
+<em>NeuroImage</em> 172 (May): 728–39. <a
+href="https://doi.org/10.1016/j.neuroimage.2018.02.016">https://doi.org/10.1016/j.neuroimage.2018.02.016</a>.
+</div>
+<div id="ref-henschelFastSurferFastAccurate2020" class="csl-entry"
+role="listitem">
+Henschel, Leonie, Sailesh Conjeti, Santiago Estrada, Kersten Diers,
+Bruce Fischl, and Martin Reuter. 2020. <span>“<span>FastSurfer</span> -
+<span>A</span> Fast and Accurate Deep Learning Based Neuroimaging
+Pipeline.”</span> <em>NeuroImage</em> 219 (October): 117012. <a
+href="https://doi.org/10.1016/j.neuroimage.2020.117012">https://doi.org/10.1016/j.neuroimage.2020.117012</a>.
+</div>
+<div id="ref-kerepesiBraingraphorgDatabaseHigh2017" class="csl-entry"
+role="listitem">
+Kerepesi, Csaba, Balázs Szalkai, Bálint Varga, and Vince Grolmusz. 2017.
+<span>“The Braingraph.org Database of High Resolution Structural
+Connectomes and the Brain Graph Tools.”</span> <em>Cognitive
+Neurodynamics</em> 11 (5): 483–86. <a
+href="https://doi.org/10.1007/s11571-017-9445-1">https://doi.org/10.1007/s11571-017-9445-1</a>.
+</div>
+<div id="ref-muscoslides514F24" class="csl-entry" role="listitem">
+Musco, Cameron. 2024. <span>“COMPSCI 514 Lecture 18: Algorithms for Data
+Science.”</span> <a
+href="https://people.cs.umass.edu/~cmusco/CS514F24/slides/lecture18/lecture18Compressed.pdf"
+class="uri">https://people.cs.umass.edu/~cmusco/CS514F24/slides/lecture18/lecture18Compressed.pdf</a>.
+</div>
+<div id="ref-salhiNetworkAnalysisHuman2023" class="csl-entry"
+role="listitem">
+Salhi, Salma, Youssef Kora, Gisu Ham, Hadi Zadeh Haghighi, and Christoph
+Simon. 2023. <span>“Network Analysis of the Human Structural Connectome
+Including the Brainstem.”</span> <em>PLOS ONE</em> 18 (4): e0272688. <a
+href="https://doi.org/10.1371/journal.pone.0272688">https://doi.org/10.1371/journal.pone.0272688</a>.
+</div>
+<div id="ref-siugzdaite2020transdiagnostic" class="csl-entry"
+role="listitem">
+Siugzdaite, Roma, Joe Bathelt, Jane Holmes, and Duncan E Astle. 2020.
+<span>“Transdiagnostic Brain Mapping in Developmental Disorders.”</span>
+<em>Current Biology</em> 30 (7): 1245–57. <a
+href="https://doi.org/10.1016/j.cub.2020.01.078">https://doi.org/10.1016/j.cub.2020.01.078</a>.
+</div>
+</div>
+</body>
+</html>
