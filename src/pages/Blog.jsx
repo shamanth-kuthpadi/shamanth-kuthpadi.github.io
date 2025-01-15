@@ -48,7 +48,7 @@ useEffect(() => {
 
       setCustomArticles([
         {
-          title: "",
+          title: "Structural Brain Connectomes",
           content: sanitizedHtml,
           pubDate: "2024-12-15",
           link: "https://drive.google.com/file/d/10iTYCI9BEZVOUOsA5EJmWnF35_UsFa_2/view?usp=sharing",
