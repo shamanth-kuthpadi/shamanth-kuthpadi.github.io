@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Article from "../components/Article.jsx";
 import TypingEffect from "react-typing-effect";
 import DOMPurify from "dompurify";
+import { motion, useScroll } from "motion/react";
 
 
 const Blog = () => {
@@ -72,8 +73,25 @@ useEffect(() => {
     (a, b) => new Date(b.pubDate) - new Date(a.pubDate)
   );
 
+  const { scrollYProgress } = useScroll();
+  
   return (
     <div className="blog">
+
+       <motion.div
+                    id="scroll-indicator"
+                    style={{
+                      scaleX: scrollYProgress,
+                      position: "fixed",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: 10,
+                      originX: 0,
+                      backgroundColor: "#ff0088",
+                    }}
+                  />
+                  
       <div className="header">
         <h1>
           <TypingEffect

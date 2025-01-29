@@ -1,6 +1,9 @@
 import React from "react";
 import TypingEffect from "react-typing-effect";
-import ProjectCard from "../components/ProjectCard.jsx"
+import ProjectCard from "../components/ProjectCard.jsx";
+import { motion, useScroll } from "motion/react";
+
+
 
 function Projects() {
   const projects = [
@@ -66,22 +69,38 @@ function Projects() {
     },
   ];
 
+  const { scrollYProgress } = useScroll();
+
   return (
-    <div className="project">
-      <div className="project-main">
-        <div className="header">
-          <h1>
-            <TypingEffect
-              text={["projects i have worked on."]}
-              speed={100}
-              eraseSpeed={50}
-              eraseDelay={2000}
-              typingDelay={500}
-            />
-          </h1>
-        </div>
+    <div className="projects-container">
+      <motion.div
+        id="scroll-indicator"
+        style={{
+          scaleX: scrollYProgress,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 10,
+          originX: 0,
+          backgroundColor: "#ff0088",
+        }}
+      />
+
+      <div className="hero">
+        <h1 className="title">
+          <TypingEffect
+            text={["stuff I coded, designed, and maybe broke (then fixed)."]}
+            speed={100}
+            eraseSpeed={50}
+            eraseDelay={2000}
+          />
+        </h1>
+        <p className="subtitle">
+          explore the projects I've worked on, from ai to web development.
+        </p>
       </div>
-      <div className="projectcards">
+      <div className="project-grid">
         {projects.map((project, index) => (
           <ProjectCard
             key={index}

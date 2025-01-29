@@ -1,5 +1,6 @@
 import React from "react";
 import TypingEffect from "react-typing-effect";
+import { motion, useScroll } from "motion/react";
 
 function Contact() {
   const [result, setResult] = React.useState("");
@@ -29,8 +30,23 @@ function Contact() {
     }
   };
 
+  const { scrollYProgress } = useScroll();
+
   return (
     <div className="contact">
+      <motion.div
+              id="scroll-indicator"
+              style={{
+                scaleX: scrollYProgress,
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 10,
+                originX: 0,
+                backgroundColor: "#ff0088",
+              }}
+            />
       <div className="contact-main">
         <div className="header">
           <h1>
