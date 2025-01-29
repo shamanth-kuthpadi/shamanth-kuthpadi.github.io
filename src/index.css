@@ -7,6 +7,7 @@ body{
     margin-bottom: 3%;
     margin-left: 3%;
     margin-right: 3%;
+    cursor: url('data:image/x-icon;base64,AAACAAEAICACAAYADAAwAQAAFgAAACgAAAAgAAAAQAAAAAEAAQAAAAAAgAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//////////////////////////////////////////////////////////////////////////////////////////////////////w////wD///8A///+AH///gB///4Af//+AH///wD///8A////w///////////////////8='), auto;
 }
 
 a {
@@ -14,7 +15,13 @@ a {
     color: hsl(221, 45%, 47%);
 }
 
-.header {
+/* .header {
+    background-color: hsla(0, 0%, 90%, 0.322);
+    margin-bottom: 5%;
+    border-radius: 10px;
+    padding: 0.5%;
+} */
+.hero {
     /* background-color: hsla(0, 0%, 90%, 0.322); */
     margin-bottom: 5%;
     border-radius: 10px;
@@ -77,6 +84,7 @@ h4 {
 }
 
 .profile-pic {
+    margin-top: 3%;
     width: 30%;
     flex-shrink: 0;
 }
@@ -89,6 +97,7 @@ h4 {
 
 h1{
     color: hsl(221, 39%, 11%);
+    font-size: 2rem;
 }
 
 header {
@@ -123,8 +132,10 @@ p {
 .experience-card a {
     text-decoration: none;
     color: hsl(221, 45%, 47%);
+    font-size: 1.2rem;
     flex: 1;
-    border-right: 4px solid #6f7070b4;
+    /* border-right: 4px solid #6f7070b4;
+    border-top: ; */
 }
 
 .experience-card .experience-card-content {
@@ -269,19 +280,11 @@ p {
 
 .hero {
     text-align: center;
-    margin-bottom: 40px;
-}
-
-.title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: hsl(221, 39%, 15%);
 }
 
 .subtitle {
     font-size: 1.2rem;
     color: hsl(0, 0%, 40%);
-    margin-top: 10px;
 }
 
 .project-grid {

@@ -77,31 +77,35 @@ useEffect(() => {
   
   return (
     <div className="blog">
+      <motion.div
+        id="scroll-indicator"
+        style={{
+          scaleX: scrollYProgress,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 10,
+          originX: 0,
+          backgroundColor: "#ff0088",
+        }}
+      />
 
-       <motion.div
-                    id="scroll-indicator"
-                    style={{
-                      scaleX: scrollYProgress,
-                      position: "fixed",
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      height: 10,
-                      originX: 0,
-                      backgroundColor: "#ff0088",
-                    }}
-                  />
-                  
-      <div className="header">
-        <h1>
-          <TypingEffect
-            text={["explore my blog."]}
-            speed={100}
-            eraseSpeed={50}
-            eraseDelay={2000}
-            typingDelay={500}
-          />
-        </h1>
+      <div className="hero">
+        <div className="header">
+          <h1>
+            <TypingEffect
+              text={["my blog."]}
+              speed={100}
+              eraseSpeed={50}
+              eraseDelay={2000}
+              typingDelay={500}
+            />
+          </h1>
+        </div>
+        <p className="subtitle">
+          just a compilation of my academic and personal writing, click the title to read.
+        </p>
       </div>
       {error && <p>{error}</p>}
       {!error && allArticles.length === 0 && <p>Loading articles...</p>}

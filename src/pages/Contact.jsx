@@ -35,29 +35,36 @@ function Contact() {
   return (
     <div className="contact">
       <motion.div
-              id="scroll-indicator"
-              style={{
-                scaleX: scrollYProgress,
-                position: "fixed",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 10,
-                originX: 0,
-                backgroundColor: "#ff0088",
-              }}
-            />
+        id="scroll-indicator"
+        style={{
+          scaleX: scrollYProgress,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 10,
+          originX: 0,
+          backgroundColor: "#ff0088",
+        }}
+      />
       <div className="contact-main">
-        <div className="header">
-          <h1>
-            <TypingEffect
-              text={["get in touch."]}
-              speed={100}
-              eraseSpeed={50}
-              eraseDelay={2000}
-              typingDelay={500}
-            />
-          </h1>
+        <div className="hero">
+          <div className="header">
+            <h1>
+              <TypingEffect
+                text={[
+                  "contact me.",
+                ]}
+                speed={100}
+                eraseSpeed={50}
+                eraseDelay={2000}
+                typingDelay={500}
+              />
+            </h1>
+          </div>
+          <p className="subtitle">
+            if any of what I do interests you, get in touch.
+          </p>
         </div>
         <form onSubmit={onSubmit} className="contact-form">
           <div className="form-group">

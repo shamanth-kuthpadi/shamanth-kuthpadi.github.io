@@ -51,30 +51,37 @@ function About() {
 
     return (
       <div className="about">
-         <motion.div
-                id="scroll-indicator"
-                style={{
-                  scaleX: scrollYProgress,
-                  position: "fixed",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: 10,
-                  originX: 0,
-                  backgroundColor: "#ff0088",
-                }}
-              />
+        <motion.div
+          id="scroll-indicator"
+          style={{
+            scaleX: scrollYProgress,
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 10,
+            originX: 0,
+            backgroundColor: "#ff0088",
+          }}
+        />
         <div className="about-main">
-          <div className="header">
-            <h1>
-              <TypingEffect
-                text={["about."]}
-                speed={100}
-                eraseSpeed={50}
-                eraseDelay={2000}
-                typingDelay={500}
-              />
-            </h1>
+          <div className="hero">
+            <div className="header">
+              <h1>
+                <TypingEffect
+                  text={[
+                    "about.",
+                  ]}
+                  speed={100}
+                  eraseSpeed={50}
+                  eraseDelay={2000}
+                  typingDelay={500}
+                />
+              </h1>
+            </div>
+            <p className="subtitle">
+              find out more about me.
+            </p>
           </div>
           <div className="container">
             <div className="profile-pic">

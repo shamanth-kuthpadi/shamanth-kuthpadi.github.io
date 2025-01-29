@@ -88,14 +88,17 @@ function Projects() {
       />
 
       <div className="hero">
-        <h1 className="title">
-          <TypingEffect
-            text={["stuff I coded, designed, and maybe broke (then fixed)."]}
-            speed={100}
-            eraseSpeed={50}
-            eraseDelay={2000}
-          />
-        </h1>
+        <div className="header">
+          <h1>
+            <TypingEffect
+              text={["stuff I coded, designed, and maybe broke (then fixed)."]}
+              speed={100}
+              eraseSpeed={50}
+              eraseDelay={2000}
+              typingDelay={500}
+            />
+          </h1>
+        </div>
         <p className="subtitle">
           explore the projects I've worked on, from ai to web development.
         </p>
