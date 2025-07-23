@@ -12,9 +12,9 @@ function Navbar() {
         <Link className="navbar-elem" to="/">
           about
         </Link>
-        <Link className="navbar-elem" to="/projects">
+        {/* <Link className="navbar-elem" to="/projects">
           projects
-        </Link>
+        </Link> */}
         <a
           className="navbar-elem"
           href="https://drive.google.com/file/d/1fn_7BNNuojMudQX1D1wUy1lo7sN56pV6/view?usp=sharing"

@@ -30,7 +30,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path="/" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
+          {/* <Route path="/projects" element={<Projects />} /> */}
           <Route path="/contact" element={<Contact />} />
           <Route
             path="/cv"
