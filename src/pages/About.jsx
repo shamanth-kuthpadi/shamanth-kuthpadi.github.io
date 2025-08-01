@@ -7,36 +7,69 @@ import TypingEffect from "react-typing-effect";
 
 import { motion, useScroll } from "motion/react";
 
-const updates = [
+const publications = [
   {
-    id: 1,
-    date: "January 2025",
-    desc: "Working on improving CryoSPIN with the help of Roshan Pathak",
+    title:
+      "A Smart Electrode-Integrated Cooling Patch for Motion-Robust ECG Monitoring and Real-Time 3D Facial Animation",
+    // link: "https://example.com/publication1",
+    authors:
+      "T. Q. Trung, S. K. Seethakantha, Z. Lei, A. Radmehr, P. Nguyen, D. Ganesan",
+    venue: "To be submitted to a journal",
+    description:
+      "Developed a smart electrode-integrated system for robust biosignal acquisition and designed a deep learning pipeline to reconstruct real-time 3D facial animations in VR from physiological signals.",
   },
   {
-    id: 2,
-    date: "January 2025",
-    desc: "Starting my Master's in Computer Science at the University of Massachusetts Amherst",
+    title:
+      "Assess-and-Evolve: Scalable Generation of Preference Tuning Data for Alleviating Hallucinations in Medical Summaries",
+    // link: "https://example.com/publication1",
+    authors:
+      "S. K. Seethakantha, D. Thai, S. Tiwari, V. P. Gudi, S. Mohan, S. Sairaj, W. Zhao, A. Mitra, A. McCallum",
+    venue: "Almost finished, to be submitted in AAAI 2026",
+    description:
+      "We propose a detect-and-revise framework paired with Direct Preference Optimization (DPO) using automatically generated silver data to reduce hallucinations in medical summarization.",
   },
   {
-    id: 3,
+    title: "Modeling & Analyzing Structural Brain Connectomes",
+    // link: "https://example.com/publication2",
+    authors: "S. Kuthpadi Seethakantha",
+    venue: "Academic Project, UMass Amherst",
+    description:
+      "This study used pre-processed brain connectome data to apply machine learning and spectral graph theory, developing a classifier that maps node-level features to brain regions.",
+  },
+];
+
+// --- News items array ---
+const news = [
+  {
+    date: "August 2025",
+    text: 'Finally "finished" creating my personal website.',
+  },
+  {
+    date: "February 2025",
+    text: "Working under the supervision of Prof. Deepak Ganesan and with Wireless and Sensor Systems Lab to create a multi-modal system for real-time 3D facial animation from physiological signals.",
+  },
+  {
+    date: "January 2025", 
+    text: "Working with Mendel.ai to mitigate hallucinations in clinical summarization using synthetic data generation and preference tuning."},
+  {
+    date: "January 2025",
+    text: "Starting my Master's in Computer Science at the University of Massachusetts Amherst",
+  },
+  {
     date: "December 2024",
-    desc: "Graduated with a Bachelor's degree in Computer Science from the University of Massachusetts Amherst",
+    text: "Graduated with a Bachelor's degree in Computer Science from the University of Massachusetts Amherst",
   },
   {
-    id: 4,
     date: "September 2024",
-    desc: "Began my Independent Study in modeling and analyzing structural brain connectomes under the supervision of Cameron Musco",
+    text: "Began my Independent Study in modeling and analyzing structural brain connectomes under the supervision of Cameron Musco",
   },
   {
-    id: 5,
     date: "June 2024",
-    desc: "Started working as a Machine Learning Research Intern at IOMICS Corporation",
+    text: "Started working as a Machine Learning Research Intern at IOMICS Corporation",
   },
   {
-    id: 6,
     date: "September 2021",
-    desc: "Started my undergraduate degree in Computer Science at the University of Massachusetts Amherst",
+    text: "Started my undergraduate degree in Computer Science at the University of Massachusetts Amherst",
   },
 ];
 
@@ -89,81 +122,56 @@ function About() {
               My research focuses on developing advanced AI systems to deepen
               our understanding of complex biological processes and drive
               impactful advancements in healthcare. By leveraging causal
-              learning and inference on multimodal data—including the detailed
-              modeling of biological networks like brain connectomes—I aim to
+              learning and inference on multimodal data — including the detailed
+              modeling of biological networks like brain connectomes — I aim to
               reveal fundamental structures and relationships that can guide
               more accurate diagnostics and innovative therapeutic approaches.
             </p>
             <p>
-              I am currently an ML research intern at{" "}
+              This summer I am a ML research intern at{" "}
               <a href="https://iomics.ai/">IOMICS Corporation</a>, where I focus
-              on building automated casual discovery/estimation pipelines and researching Kolmogorov-Arnold Networks (KANs) for their applicability in the unsupervised and supervised domains. 
+              on building automated casual discovery/estimation pipelines and
+              researching Kolmogorov-Arnold Networks (KANs) for their
+              applicability in the unsupervised and supervised domains.
             </p>
           </div>
         </div>
       </div>
-      <div className="experiences">
-        <h2>My Experience</h2>
-        <Experience
-          name="IOMICS Corporation"
-          date="June 2024"
-          title="Machine Learning Research Intern"
-          desc={[
-            "Provided data-driven recommendations to the CTO and chief engineer, contributing to strategic decisions in product development and deployment",
-            "Reviewed 50+ research papers on advanced machine learning and causal inference/discovery methodologies",
-            "Utilized cutting-edge tools such as DoWhy and causal-learn to explore and answer causal questions in omics data",
-            "Developed and delivered tutorials and theoretical presentations on causal analysis, effectively communicating complex concepts to the company’s engineers",
-          ]}
-          link="https://iomics.ai/"
-        />
-        <Experience
-          name="University of Massachusetts Amherst"
-          date="Sept. 2023 - June 2024"
-          title="Undergraduate Course Assistant (UCA)"
-          desc={[
-            "Collaborated directly with professors and course instructors to foster learning 300+ students",
-            "Engaged directly with students to provide course assistance in a broad category of concepts",
-          ]}
-          link="https://www.umass.edu"
-        />
-        <Experience
-          name=""
-          date="Sept. 2023 - Dec. 2023"
-          title="Learning Resource Center (LRC) Peer Tutor"
-          desc={[
-            "Mentored 30+ students in a broad category of courses within the computer science department, earning an extension contract as a result of my effectiveness",
-            "Selected as a distinguished hire from a pool of hundreds of candidates through two rounds of interview where I was tested on communication skills and academic aptitude",
-          ]}
-          link="https://www.umass.edu"
-        />
-        <Experience
-          name=""
-          date="June 2023 - Sept. 2023"
-          title="Undergraduate Research Volunteer (URV)"
-          desc={[
-            "Developed research skills in the field of data science and machine learning",
-            "Shadowed PhD research work in Approximate Nearest Neighbor(ANN) search algorithm, gaining exposure to lab work",
-            "Calculated performance metrics of various ANNs systems and visualized them graphically",
-          ]}
-          link="https://www.umass.edu"
-        />
-      </div>
-      <div className="updates">
-        <h2>Updates</h2>
-        <div className="timeline-container">
-          {updates.map((item, index) => (
-            <div key={item.id} className="timeline-item">
-              {/* Timeline marker */}
-              <div className="timeline-marker">{index + 1}</div>
-
-              {/* Update content */}
-              <div className="timeline-content">
-                <b className="timeline-date">{item.date}</b>
-                <p>{item.desc}</p>
-              </div>
-            </div>
+      {/* --- News Section --- */}
+      <div className="news-section">
+        <h2 className="section-title">
+          News
+        </h2>
+        <ul>
+          {news.map((item, idx) => (
+            <li>
+              <span>
+                {item.text}
+              </span>
+              <span>{item.date}</span>
+            </li>
           ))}
-        </div>
+        </ul>
+      </div>
+      {/* --- End News Section --- */}
+      <div className="research-section">
+        <h2 className="section-title">Publications & Current Research</h2>
+        {publications.map((pub, index) => (
+          <div key={index} className="publication-item">
+            <a
+              href={pub.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pub-title"
+            >
+              {pub.title}
+            </a>
+            <div className="pub-meta">
+              <span>{pub.authors}</span> · <span>{pub.venue}</span>
+            </div>
+            <p className="pub-description">{pub.description}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
