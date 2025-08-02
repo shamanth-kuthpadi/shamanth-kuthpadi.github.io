@@ -103,7 +103,7 @@ const Blog = () => {
           </h1>
         </div>
         <p className="subtitle">
-          {`just a compilation of my academic and personal writing — ${allArticles.length} articles.`}
+          {`just a compilation of my academic and personal writing — at some point I do hope to source these locally.`}
         </p>
 
         <input
