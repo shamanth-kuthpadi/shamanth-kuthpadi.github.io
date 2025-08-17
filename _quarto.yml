@@ -1,0 +1,40 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Shamanth Kuthpadi S."
+  description: "Shamanth Kuthpadi's academic home page"
+  site-url: https://shamanthkuthpadi.com
+  open-graph: true
+  navbar:
+    background: dark
+    search: true
+    right:
+      - href: index.qmd
+        text: Home
+      - text: Blog
+        href: blog.qmd
+      - text: CV
+        href: CV.pdf
+  page-footer:
+    border: true
+    background: dark
+    left:
+      - "Copyright 2025, Shamanth Kuthpadi."
+    right:
+      - icon: github
+        href: https://github.com/shamanth-kuthpadi
+      - icon: linkedin
+        href: https://www.linkedin.com/in/sham-kuthpa-c219/
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    css: styles.css
+    page-layout: full
+    code-tools: false
+    code-fold: true
+    code-copy: true
+    thebe: true
