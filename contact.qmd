@@ -1,0 +1,38 @@
+---
+title: "Contact"
+format: html
+---
+
+If any of what I do interests you, get in touch.
+
+::: {.contact-form}
+## Get in Touch
+
+You can reach me through the following channels:
+
+- **Email**: [shamanth.kuthpadi@gmail.com](mailto:shamanth.kuthpadi@gmail.com)
+- **LinkedIn**: [Shamanth Kuthpadi](https://www.linkedin.com/in/shamanth-kuthpadi/)
+- **GitHub**: [shamanth-kuthpadi](https://github.com/shamanth-kuthpadi)
+
+## Contact Form
+
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name" required><br><br>
+
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <label for="message">Message:</label><br>
+  <textarea id="message" name="message" rows="5" required></textarea><br><br>
+
+  <button type="submit">Send</button>
+</form>
+
+:::
+
+::: {.response-time}
+## Response Time
+
+I typically respond to emails within 24-48 hours during weekdays. For urgent matters, please use the direct email contact.
+:::

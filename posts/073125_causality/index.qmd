@@ -1,0 +1,57 @@
+---
+title: "Causality in the Machine Learning Realm"
+author: "Shamanth Kuthpadi S."
+date: "2025-07-31"
+categories: [machine learning, causal inference, causal discovery]
+image: "073125_causality.png"
+draft: false
+---
+
+We should first begin by motivating the use cases for causal inference in the world of machine learning (ML). Before we do so, however, it is critical to emphasize the key differences between typical ML algorithms and causal inference.
+
+### What are the differences?
+
+#### Association vs. Causation
+As I am sure you have heard many times in a statistics class, association doesn’t imply causation — this is the underlying principle behind why we should care about causal inference.
+
+A canonical example to illustrate and really bring home this difference between association and causation is to breifly look at a case study that relates chocolate consumption to Nobel prizes. It was shown that higher chocolate consumption increases the chances of winning a Nobel prize. Of course, eating chocolates is not directly causing Nobel prizes — so then what should we make of this correlation?
+
+Just that. It is simply a correlation because we haven’t ruled out latent or confounding variables that could have caused both chocolate consumption and Nobel prizes. In fact, another recent study has shown that high chocolate consumption probably means you are financially stable and so this would result in better academic facilities.
+
+### Why causation?
+
+Causal reasoning is crucial when we want to understand mechanisms, intervene in systems, or make decisions that change outcomes.
+
+Imagine you’re a policymaker deciding whether to invest in a new education program. A traditional ML model might tell you that students who participate in similar programs tend to have higher test scores. But what if these students already had access to better schools or more support at home? In this case, correlation doesn’t help you decide whether the program causes improvement.
+
+Causal inference lets us answer questions like:
+
+What would have happened if we hadn’t implemented this policy?
+Will increasing X lead to an increase in Y, holding everything else constant?
+What’s the effect of this treatment on this outcome?
+In contrast, standard ML models mostly aim to predict outcomes — not explain them.
+
+### How Do We Learn Causal Relationships (aka causal discovery)?
+
+Since we can’t usually perform controlled experiments in every scenario, we need to learn causality from observational data. This is hard because we only ever observe one reality (e.g., a person either took a drug or didn’t — not both).
+
+While I won’t delve deeply into algorithmic details here, below are some commonly used causal discovery methods:
+
+Peter-Clark (PC) Algorithm: a constraint-based method that uses conditional independence tests to infer the structure of a causal graph, assuming causal sufficiency and faithfulness
+Greed Equivalence Search (GES): a score-based approach that searches over equivalence classes of DAGs by greedily adding or removing edges to optimize a score function
+Linear Non-Gaussian Acyclic Model (LiNGAM): an algorithm designed for linear systems with non-Gaussian noise, which exploits statistical independence to identify the full causal ordering among variables
+
+### When Should You Use Causal Inference?
+
+Causal inference becomes essential when:
+
+You’re making policy decisions or product changes and want to know their effect
+There’s concern about bias or confounding
+You need to simulate interventions or counterfactuals
+Your end-goal is understanding, not just prediction
+
+### Final Thoughts
+
+Causal inference is not a replacement for machine learning — it’s a complement. Predictive models can guide actions, but causal models explain why things happen and help guide what we should do.
+
+In a world driven by data, understanding causation helps us move beyond trends and patterns to the underlying mechanisms. It gives us the tools to make better decisions, especially when the stakes are high.

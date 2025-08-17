@@ -1,0 +1,14 @@
+---
+title: "just a compilation of my academic and personal writing"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: grid
+  categories: false
+  sort-ui: true
+  filter-ui: true
+page-layout: full
+title-block-banner: false
+---
+
+

@@ -1,0 +1,34 @@
+.scrollable-news {
+  max-height: 300px;          /* Set the visible height */
+  overflow-y: auto;           /* Enable vertical scrolling */
+  padding-right: 5px;        /* Avoid text clipping */
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  scroll-behavior: smooth;    /* Smooth scroll for modern browsers */
+}
+
+/* Optional: style individual news items on hover */
+.scrollable-news .news-item {
+  padding: 8px 4px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.scrollable-news .news-item:hover {
+  background-color: #f0f8ff;  /* subtle highlight */
+  transform: translateX(2px); /* tiny movement for depth effect */
+}
+
+/* Optional: nice thin scrollbar for WebKit browsers */
+.scrollable-news::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable-news::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+.scrollable-news::-webkit-scrollbar-track {
+  background: transparent;
+}
