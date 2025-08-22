@@ -1,0 +1,18 @@
+---
+title: "On Transformers (with PyTorch)"
+author: "Shamanth Kuthpadi S."
+date: "2025-08-18"
+categories: [machine learning, neural networks, architecture]
+image: "081825_transformers.png"
+draft: true
+---
+
+I always find building and documenting things from scratch to be the most beneficial to my learning (especially architectures such as this one) and thus the motivation for this blog post -- a documentation for everything that I learn about transformers.
+
+### Architecture Diagram
+<img src="https://machinelearningmastery.com/wp-content/uploads/2021/08/attention_research_1.png" width="350">
+
+### Self-Attention
+
+
+
