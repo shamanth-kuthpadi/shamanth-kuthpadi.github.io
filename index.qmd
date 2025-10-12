@@ -17,6 +17,9 @@ about:
     - icon: envelope
       text: Email
       href: mailto:shamanth.kuthpadi@gmail.com
+    - icon: orcid
+      text: ORCID
+      href: https://orcid.org/0009-0001-1438-5779
 ---
 
 :::{#hero-heading}
@@ -28,6 +31,8 @@ My research focuses on developing advanced AI systems to deepen our understandin
 I am a computer science graduate student at the [Manning College of Information and Computer Sciences](https://www.cics.umass.edu/) in UMass Amherst. This summer I am a ML research intern at [IOMICS Corporation](https://iomics.ai/), where I focus on building automated casual discovery/estimation pipelines and researching Kolmogorov-Arnold Networks (KANs) for their applicability in the unsupervised and supervised domains.
 
 :::
+
+---
 
 ### News
 ::: {.scrollable-news}
@@ -57,25 +62,24 @@ I am a computer science graduate student at the [Manning College of Information 
 :::
 :::
 
-### Publications & Current Research
+---
+
+### Selected Publications & Current Research
 
 **A Smart Electrode-Integrated Cooling Patch for Motion-Robust ECG Monitoring and Real-Time 3D Facial Animation**\
 <small>
-Authors: *T. Q. Trung, S. K. Seethakantha, Z. Lei, A. Radmehr, P. Nguyen, D. Ganesan*\
-Venue: *To be submitted to a journal*\
-Description: *Developed a smart electrode-integrated system for robust biosignal acquisition and designed a deep learning pipeline to reconstruct real-time 3D facial animations in VR from physiological signals.*
+T. Q. Trung, **S. K. Seethakantha**, Z. Lei, A. Radmehr, P. Nguyen, D. Ganesan\
+*Submitted to Nature Sensors*\
+</small>
+
+**Artificial Intelligence and Discovery Automation: Path to Democratizing Science**\
+<small>
+J. Gormley, D. Corkill, E. Hinderer, **S. K. Seethakantha**, T. Zisk\
+*Submitted to International Conference on Systems Biology (ICSB)*\
 </small>
 
 **Assess-and-Evolve: Scalable Generation of Preference Tuning Data for Alleviating Hallucinations in Medical Summaries**\
 <small>
-Authors: *S. K. Seethakantha, D. Thai, S. Tiwari, V. P. Gudi, S. Mohan, S. Sairaj, W. Zhao, A. Mitra, A. McCallum*\
-Venue: *Almost finished, to be submitted in AAAI 2026*\
-Description: *We propose a detect-and-revise framework paired with Direct Preference Optimization (DPO) using automatically generated silver data to reduce hallucinations in medical summarization.*
-</small>
-
-**Modeling & Analyzing Structural Brain Connectomes**\
-<small>
-Authors: *S. Kuthpadi Seethakantha*\  
-Venue: *Academic Project, UMass Amherst*\
-Description: *This study used pre-processed brain connectome data to apply machine learning and spectral graph theory, developing a classifier that maps node-level features to brain regions.*
+**S. K. Seethakantha**, D. Thai, S. Tiwari, V. P. Gudi, S. Mohan, S. Sairaj, W. Zhao, A. Mitra, A. McCallum\
+*Almost finished, to be submitted to ACL*\
 </small>

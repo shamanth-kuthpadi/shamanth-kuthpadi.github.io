@@ -31,3 +31,4 @@ favicon_io
 
 DEPLOYMENT.md
 MIGRATION_SUMMARY.md
+**/*.quarto_ipynb

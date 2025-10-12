@@ -10,7 +10,7 @@
 
 /* Optional: style individual news items on hover */
 .scrollable-news .news-item {
-  padding: 8px 4px;
+  /* padding: 8px 4px; */
   transition: background-color 0.2s, transform 0.2s;
 }
 
