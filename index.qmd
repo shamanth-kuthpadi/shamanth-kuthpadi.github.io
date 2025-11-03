@@ -69,7 +69,7 @@ I am a computer science graduate student at the [Manning College of Information 
 **A Smart Electrode-Integrated Cooling Patch for Motion-Robust ECG Monitoring and Real-Time 3D Facial Animation**\
 <small>
 T. Q. Trung, **S. K. Seethakantha**, Z. Lei, A. Radmehr, P. Nguyen, D. Ganesan\
-*Submitted to Nature Sensors*\
+*Submitted to Nature Communications*\
 </small>
 
 **Artificial Intelligence and Discovery Automation: Path to Democratizing Science**\
