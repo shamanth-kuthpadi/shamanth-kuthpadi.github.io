@@ -31,6 +31,7 @@ website:
 format:
   html:
     theme: cosmo
+    fontsize: 1.2em
     toc: true
     css: styles.css
     page-layout: full
