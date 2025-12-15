@@ -5,6 +5,7 @@ project:
 website:
   title: "Shamanth Kuthpadi S."
   description: "Shamanth Kuthpadi's academic home page"
+  site-url: https://shamanth-kuthpadi.github.io
   open-graph: true
   navbar:
     background: dark
