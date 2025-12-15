@@ -4,7 +4,7 @@ author: "Shamanth Kuthpadi S."
 date: "2024-01-16"
 categories: [machine learning, neural networks, architecture]
 image: "011624_rnn.svg"
-draft: false
+draft: true
 ---
 
 In the realm of deep learning, vanilla feed-forward neural networks fall short when dealing with sequential data. Sequential information can be best illustrated by text. The context of each word in a sentence is semantically dependent on the words that came before it. Preserving and retaining this information is a short-coming of a typical feed-forward neural net.

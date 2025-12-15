@@ -7,12 +7,20 @@ image: "081825_transformers.png"
 draft: true
 ---
 
-I always find building and documenting things from scratch to be the most beneficial to my learning (especially architectures such as this one) and thus the motivation for this blog post -- a documentation for everything that I learn about transformers.
+I’ve always found that building systems and documenting concepts from the ground up is the most effective way for me to learn—especially when it comes to complex architectures like transformers. This blog post is motivated by that philosophy: to create a comprehensive, self-contained record of everything I learn about transformers. By sharing this work, I hope to provide researchers and practitioners with a clear, consolidated reference that makes understanding and exploring transformer architectures more accessible.
 
-### Architecture Diagram
+### Architecture Diagram [1]
 <img src="https://machinelearningmastery.com/wp-content/uploads/2021/08/attention_research_1.png" width="350">
 
-### Self-Attention
+### Why Transformers?
+
+Originally, the transformer architecture was introduced for machine translation—the task of converting text from one language to another [1]. Since then, it has become remarkably ubiquitous across a wide range of domains.
+
+Naturally, this raises an important question: why? To answer this we should begin by understanding the features of transformers that make them different from recurrent neural networks (i.e., long short-term memory and gated recurrent neural networks).
 
 
+#### Recurrent Neural Networks
+Prior to the introduction of transformers, recurrent neural nets were the state-of-the-art for sequence modeling. 
 
+# References
+[1] Vaswani, Ashish, et al. "Attention is all you need." Advances in neural information processing systems 30 (2017).
