@@ -35,7 +35,7 @@ I am also a part-time research intern under the supervision of [Dr. Daniel D. Co
 ### News
 ::: {.scrollable-news}
 ::: {.news-item}
-**November 2025**: Admitted to UMass Amherst to pursue a PhD in Computer Science under the supervision of Dr. Deepak Ganesan. I would like to firstly thank my parents for supporting me through this journey and I would also like to thank Prof. Ganesan for taking a chance on me. Special thanks to Dr. Daniel D. Corkill for his supervision through the procedure as well.
+**November 2025**: Admitted to UMass Amherst to pursue a PhD in Computer Science under the supervision of Dr. Deepak Ganesan. I would like to firstly thank my parents for supporting me through this journey and I would also like to thank Prof. Ganesan for taking a chance on me. Special thanks to Dr. Daniel D. Corkill and Prof. Cameron Musco for their supervision through the procedure as well.
 :::
 ::: {.news-item}
 **August 2025**: Finally "finished" creating my personal website.
