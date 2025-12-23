@@ -24,9 +24,7 @@ about:
 **About Me**\
 I am a computer science graduate student at the [Manning College of Information and Computer Sciences](https://www.cics.umass.edu/) in UMass Amherst. I am fortunate enough to be advised by [Prof. Deepak Ganesan](https://people.cs.umass.edu/~dganesan/).
 
-My research interests lie in developing end-to-end machine learning pipelines that can be leveraged for impactful ad-
-vancements in healthcare. The hope is that by doing so, I can help optimize healthcare outcomes and ultimately com-
-pute for the common good. I also have a keen interest in designing these ML pipelines in an explainable and interpretable
+My research interests lie in developing end-to-end machine learning pipelines that can be leveraged for impactful advancements in healthcare. The hope is that by doing so, I can help optimize healthcare outcomes and ultimately compute for the common good. I also have a keen interest in designing these ML pipelines in an explainable and interpretable
 way (whenever possible).
 
 I am also a part-time research intern under the supervision of [Dr. Daniel D. Corkill](https://scholar.google.com/citations?hl=en&user=56qcx4MAAAAJ&view_op=list_works) at [IOMICS Corporation](https://iomics.ai/), where I focus on building automated casual discovery/estimation pipelines and researching Kolmogorov-Arnold Networks (KANs) for their applicability in the unsupervised and supervised domains.
