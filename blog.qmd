@@ -11,4 +11,7 @@ page-layout: full
 title-block-banner: false
 ---
 
+Still updating this but a lot more to come so stay tuned!
+
+P.S. If you looked at the blog site in its previous state -- the writings were not complete and I accidentally forgot to falsify the "draft" boolean.
 

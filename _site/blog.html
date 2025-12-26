@@ -80,9 +80,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
+      searchColumns: [],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -132,10 +132,8 @@ window.Quarto = {
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="just a compilation of my academic and personal writing – Shamanth Kuthpadi S.">
-<meta property="og:image" content="https://shamanthkuthpadi.com/posts/073125_causality/073125_causality.png">
+<meta property="og:description" content="Shamanth Kuthpadi’s academic home page">
 <meta property="og:site_name" content="Shamanth Kuthpadi S.">
-<meta property="og:image:height" content="1024">
-<meta property="og:image:width" content="1536">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -203,85 +201,21 @@ window.Quarto = {
 </header>
 
 
+<p>Still updating this but a lot more to come so stay tuned!</p>
+<p>P.S. If you looked at the blog site in its previous state – the writings were not complete and I accidentally forgot to falsify the “draft” boolean.</p>
 
 
 
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-      <option value="" disabled="" selected="" hidden="">Order By</option>
-      <option value="index" data-direction="asc">Default</option>
-      <option value="listing-title" data-direction="asc">
-        Title
-      </option>
-      <option value="listing-date-sort" data-direction="asc">
-        Date - Oldest
-      </option>
-      <option value="listing-date-sort" data-direction="desc">
-        Date - Newest
-      </option>
-      <option value="listing-author" data-direction="asc">
-        Author
-      </option>
-    </select>
-  </div>
     <div class="input-group input-group-sm quarto-listing-filter">
       <span class="input-group-text"><i class="bi bi-search"></i></span>
       <input type="text" class="search form-control" placeholder="Filter">
     </div>
 </div>
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="bWFjaGluZSUyMGxlYXJuaW5nJTJDY2F1c2FsJTIwaW5mZXJlbmNlJTJDY2F1c2FsJTIwZGlzY292ZXJ5" data-listing-date-sort="1753934400000" data-listing-file-modified-sort="1765773108915" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="557">
-<a href="./posts/073125_causality/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./posts/073125_causality/073125_causality.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Causality in the Machine Learning Realm
-</h5>
-<div class="card-text listing-description delink">
-We should first begin by motivating the use cases for causal inference in the world of machine learning (ML). Before we do so, however, it is critical to emphasize the key…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Shamanth Kuthpadi S.
-</div>
-<div class="listing-date">
-Jul 31, 2025
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="bWFjaGluZSUyMGxlYXJuaW5nJTJDY2xhc3NpZmljYXRpb24lMkNhbGdvcml0aG0=" data-listing-date-sort="1716436800000" data-listing-file-modified-sort="1765773108914" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1052">
-<a href="./posts/052324_decision_trees/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./posts/052324_decision_trees/052324_decision_trees.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Decision Trees for Classification
-</h5>
-<div class="card-text listing-description delink">
-Before we begin to analyze and dissect the functional structure of Decision Trees (also referred to as Classification Trees), it is critical to motivate its applications in…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Shamanth Kuthpadi S.
-</div>
-<div class="listing-date">
-May 23, 2024
-</div>
-</div>
-</div>
-</div></a>
-</div>
+
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div></main> <!-- /main -->

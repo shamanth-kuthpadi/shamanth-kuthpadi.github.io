@@ -4,7 +4,7 @@ author: "Shamanth Kuthpadi S."
 date: "2024-05-23"
 categories: [machine learning, classification, algorithm]
 image: "052324_decision_trees.png"
-draft: false
+draft: true
 ---
 
 Before we begin to analyze and dissect the functional structure of Decision Trees (also referred to as Classification Trees), it is critical to motivate its applications in the machine learning world.

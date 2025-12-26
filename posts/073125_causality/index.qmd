@@ -4,7 +4,7 @@ author: "Shamanth Kuthpadi S."
 date: "2025-07-31"
 categories: [machine learning, causal inference, causal discovery]
 image: "073125_causality.png"
-draft: false
+draft: true
 ---
 
 We should first begin by motivating the use cases for causal inference in the world of machine learning (ML). Before we do so, however, it is critical to emphasize the key differences between typical ML algorithms and causal inference.
