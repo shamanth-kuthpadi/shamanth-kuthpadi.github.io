@@ -71,6 +71,7 @@ I am also a part-time research intern under the supervision of [Dr. Daniel D. Co
 **VYRE: Low-burden and Robust Oscillometric-based Ring-worn  System for Continuous Blood Pressure Monitoring**
 <small>
 Amirmohammad Radmehr, **Shamanth Kuthpadi Seethakantha**, Abdul Aziz, Quang Trung Tran, Aryan Nair, William Saulnier, Deepak Ganesan, VP Nguyen
+*Submitted to SenSys26*
 </small>
 
 **A Smart Electrode-Integrated Cooling Patch for Motion-Robust ECG Monitoring and Real-Time 3D Facial Animation**\
