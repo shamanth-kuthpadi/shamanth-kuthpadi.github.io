@@ -296,7 +296,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Model window – what the model actually takes as input</li>
 <li>Hop size – how often the model predicts/tags</li>
 </ol>
-<p>Following from these scales, the <strong>general streaming procedure</strong> is to: 1. Read a small chunk of audio 2. Append chunk to buffer - if buffer is full: - check if hop interval elapsed - Yes? perform model inference 3. Wait a correct amount of real-time 4. Repeat</p>
+<p>Following from these scales, the <strong>general streaming procedure</strong> is to:</p>
+<ol type="1">
+<li>Read a small chunk of audio</li>
+<li>Append chunk to buffer
+<ul>
+<li>if buffer is full:
+<ul>
+<li>check if hop interval elapsed
+<ul>
+<li>Yes? perform model inference</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Wait a correct amount of real-time</li>
+<li>Repeat</li>
+</ol>
 <div id="62fd4630-522f-4c58-aed3-22e55392b679" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tagging model (you should replace with your own model)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tag(window):</span>
