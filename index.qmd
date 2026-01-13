@@ -24,7 +24,7 @@ about:
 **About Me**\
 I am a computer science graduate student at the [Manning College of Information and Computer Sciences](https://www.cics.umass.edu/) in UMass Amherst. I am fortunate enough to be advised by [Prof. Deepak Ganesan](https://people.cs.umass.edu/~dganesan/).
 
-My research interests lie in developing end-to-end machine learning pipelines that can be leveraged for impactful advancements in healthcare. The hope is that by doing so, I can help optimize healthcare outcomes and ultimately compute for the common good. I also have a keen interest in designing these ML pipelines in an explainable and interpretable
+My research interests lie in developing end-to-end machine learning pipelines that can be leveraged for impactful advancements in healthcare. The hope is that, by doing so, I can help optimize healthcare outcomes and ultimately compute for the common good. I also have a keen interest in designing these ML pipelines in an explainable and interpretable
 way (whenever possible).
 
 I am also a part-time research intern under the supervision of [Dr. Daniel D. Corkill](https://scholar.google.com/citations?hl=en&user=56qcx4MAAAAJ&view_op=list_works) at [IOMICS Corporation](https://iomics.ai/), where I focus on building automated casual discovery/estimation pipelines and researching Kolmogorov-Arnold Networks (KANs) for their applicability in the unsupervised and supervised domains.
@@ -35,6 +35,9 @@ I am also a part-time research intern under the supervision of [Dr. Daniel D. Co
 
 ### News
 ::: {.scrollable-news}
+::: {.news-item}
+**January 2025**: Submitted *Hallucination Detection-Guided Preference Optimization for Clinical Summarization* to ACL ARR 2026.
+:::
 ::: {.news-item}
 **November 2025**: Admitted to UMass Amherst to pursue a PhD in Computer Science under the supervision of Dr. Deepak Ganesan. I would like to firstly thank my parents for supporting me through this journey and I would also like to thank Prof. Ganesan for taking a chance on me. Special thanks to Dr. Daniel D. Corkill and Prof. Cameron Musco for their supervision through the procedure as well.
 :::
@@ -68,6 +71,12 @@ I am also a part-time research intern under the supervision of [Dr. Daniel D. Co
 
 ### Selected Publications & Current Research
 
+**Hallucination Detection-Guided Preference Optimization for Clinical Summarization**\
+<small>
+**S.K. Seethakantha**, D.N. Thai, S. Tiwari, V.P. Gudi, R. Matar, W. Zhao, A. Mitra, W. Salloum, A. McCallum\
+*Submitted to ACL ARR 2026*\
+</small>
+
 **VYRE: Low-burden and Robust Oscillometric-based Ring-worn  System for Continuous Blood Pressure Monitoring**\
 <small>
 Amirmohammad Radmehr, **Shamanth Kuthpadi Seethakantha**, Abdul Aziz, Quang Trung Tran, Aryan Nair, William Saulnier, Deepak Ganesan, VP Nguyen
@@ -84,10 +93,4 @@ T. Q. Trung, **S. K. Seethakantha**, Z. Lei, A. Radmehr, P. Nguyen, D. Ganesan\
 <small>
 J. Gormley, D. Corkill, E. Hinderer, **S. K. Seethakantha**, T. Zisk\
 *Submitted to International Conference on Systems Biology (ICSB)*\
-</small>
-
-**Assess-and-Evolve: Scalable Generation of Preference Tuning Data for Alleviating Hallucinations in Medical Summaries**\
-<small>
-**S. K. Seethakantha**, D. Thai, S. Tiwari, V. P. Gudi, S. Mohan, S. Sairaj, W. Zhao, A. Mitra, A. McCallum\
-*Almost finished, to be submitted to ACL*\
 </small>
