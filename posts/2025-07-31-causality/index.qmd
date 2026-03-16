@@ -3,7 +3,7 @@ title: "Causality in the Machine Learning Realm"
 author: "Shamanth Kuthpadi S."
 date: "2025-07-31"
 categories: [machine learning, causal inference, causal discovery]
-image: "073125_causality.png"
+image: "causality.png"
 draft: true
 ---
 

@@ -3,7 +3,7 @@ title: "Recurrent Neural Networks: Unveiling Sequential Power"
 author: "Shamanth Kuthpadi S."
 date: "2024-01-16"
 categories: [machine learning, neural networks, architecture]
-image: "011624_rnn.svg"
+image: "rnn.svg"
 draft: true
 ---
 

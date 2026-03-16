@@ -1,6 +1,11 @@
 project:
   type: website
   output-dir: _site
+  render:
+    - "*.qmd"
+    - "posts/**/*.qmd"
+    - "posts/**/*.ipynb"
+    - "!CLAUDE.md"
 
 website:
   title: "Shamanth Kuthpadi S."
@@ -30,10 +35,11 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: [cosmo, custom.scss]
+      dark: [darkly, custom-dark.scss, custom.scss]
     fontsize: 1.1em
     toc: true
-    css: styles.css
     page-layout: full
     code-tools: false
     code-fold: true

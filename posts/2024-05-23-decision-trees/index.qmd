@@ -3,7 +3,7 @@ title: "Decision Trees for Classification"
 author: "Shamanth Kuthpadi S."
 date: "2024-05-23"
 categories: [machine learning, classification, algorithm]
-image: "052324_decision_trees.png"
+image: "decision-trees.png"
 draft: true
 ---
 

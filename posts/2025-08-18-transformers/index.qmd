@@ -3,7 +3,7 @@ title: "On Transformers (with PyTorch)"
 author: "Shamanth Kuthpadi S."
 date: "2025-08-18"
 categories: [machine learning, neural networks, architecture]
-image: "081825_transformers.png"
+image: "transformers.png"
 draft: true
 ---
 

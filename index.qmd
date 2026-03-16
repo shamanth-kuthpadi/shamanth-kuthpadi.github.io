@@ -1,5 +1,5 @@
 ---
-title: "Shamanth Kuthpadi S."
+title: "Shamanth Kuthpadi"
 subtitle: "skuthpadi[at]umass[dot]edu"
 image: profile.jpeg
 keywords: ["Shamanth", "Kuthpadi", "Seethakantha", "data science", "real-time inference", "causal inference", "machine learning", "academic porfolio", "CV"]
@@ -14,9 +14,6 @@ about:
     - icon: github
       text: github
       href: https://github.com/shamanth-kuthpadi
-    - icon: envelope
-      text: Email
-      href: mailto:shamanth.kuthpadi@gmail.com
 ---
 
 :::{#hero-heading}
@@ -35,6 +32,12 @@ I am also a part-time research intern under the supervision of [Dr. Daniel D. Co
 
 ### News
 ::: {.scrollable-news}
+::: {.news-item}
+**January 2025**: VYRE paper was accepted to Sensys26.
+:::
+::: {.news-item}
+**January 2025**: PhD mentor for COMPSCI 698DS.
+:::
 ::: {.news-item}
 **January 2025**: Submitted *Hallucination Detection-Guided Preference Optimization for Clinical Summarization* to ACL ARR 2026.
 :::
@@ -71,26 +74,20 @@ I am also a part-time research intern under the supervision of [Dr. Daniel D. Co
 
 ### Selected Publications & Current Research
 
-**Hallucination Detection-Guided Preference Optimization for Clinical Summarization**\
-<small>
-**S.K. Seethakantha**, D.N. Thai, S. Tiwari, V.P. Gudi, R. Matar, W. Zhao, A. Mitra, W. Salloum, A. McCallum\
-*Submitted to ACL ARR 2026*\
-</small>
+::: {.publication}
+[**Hallucination Detection-Guided Preference Optimization for Clinical Summarization**]{.pub-title}\
+[**S.K. Seethakantha**, D.N. Thai, S. Tiwari, V.P. Gudi, R. Matar, W. Zhao, A. Mitra, W. Salloum, A. McCallum]{.pub-authors}\
+[Submitted to ACL ARR 2026]{.pub-venue}
+:::
 
-**VYRE: Low-burden and Robust Oscillometric-based Ring-worn  System for Continuous Blood Pressure Monitoring**\
-<small>
-Amirmohammad Radmehr, **Shamanth Kuthpadi Seethakantha**, Abdul Aziz, Quang Trung Tran, Aryan Nair, William Saulnier, Deepak Ganesan, VP Nguyen
-*Submitted to SenSys26*
-</small>
+::: {.publication}
+[**A Smart Electrode-Integrated Cooling Patch for Motion-Robust ECG Monitoring and Real-Time 3D Facial Animation**]{.pub-title}\
+[T. Q. Trung, **S. K. Seethakantha**, Z. Lei, A. Radmehr, P. Nguyen, D. Ganesan]{.pub-authors}\
+[Submitted to Advanced Healthcare Materials]{.pub-venue}
+:::
 
-**A Smart Electrode-Integrated Cooling Patch for Motion-Robust ECG Monitoring and Real-Time 3D Facial Animation**\
-<small>
-T. Q. Trung, **S. K. Seethakantha**, Z. Lei, A. Radmehr, P. Nguyen, D. Ganesan\
-*Submitted to Nature Communications*\
-</small>
-
-**Artificial Intelligence and Discovery Automation: Path to Democratizing Science**\
-<small>
-J. Gormley, D. Corkill, E. Hinderer, **S. K. Seethakantha**, T. Zisk\
-*Submitted to International Conference on Systems Biology (ICSB)*\
-</small>
+::: {.publication}
+[**Artificial Intelligence and Discovery Automation: Path to Democratizing Science**]{.pub-title}\
+[J. Gormley, D. Corkill, E. Hinderer, **S. K. Seethakantha**, T. Zisk]{.pub-authors}\
+[Submitted to International Conference on Systems Biology (ICSB)]{.pub-venue}
+:::
