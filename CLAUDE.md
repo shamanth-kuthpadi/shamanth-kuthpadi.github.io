@@ -39,7 +39,17 @@ Every post lives in its own folder under `posts/` with the naming convention `YY
 - **`index.qmd`** for markdown posts (supports full LaTeX math) or **`index.ipynb`** for Jupyter notebook posts
 - Any images/assets used by the post
 
-To create a new post: `mkdir posts/YYYY-MM-DD-topic/` and add an `index.qmd` or `index.ipynb` with frontmatter (title, author, date, categories, image, draft).
+To create a new post, use the `new-post.sh` script:
+
+```bash
+# Markdown + LaTeX post
+./new-post.sh md <slug> -t 'Title' -c 'cat1,cat2'
+
+# Jupyter notebook post
+./new-post.sh nb <slug> -t 'Title' -c 'cat1,cat2'
+
+# Options: -t/--title, -c/--categories, -d/--date (default: today), -p/--publish (default: draft)
+```
 
 - Set `draft: false` in frontmatter to publish (most posts are currently `draft: true`)
 - Computational output is frozen via `posts/_metadata.yml` (`freeze: true`), cached in `_freeze/`

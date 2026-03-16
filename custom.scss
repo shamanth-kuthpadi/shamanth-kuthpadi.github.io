@@ -13,10 +13,14 @@
 }
 
 .scrollable-news .news-item {
-  padding: 8px 10px;
-  margin-bottom: 4px;
+  padding: 4px 10px;
+  margin-bottom: 0;
   border-radius: 6px;
   transition: background-color 0.2s, transform 0.2s;
+}
+
+.scrollable-news .news-item p {
+  margin-bottom: 0;
 }
 
 .scrollable-news .news-item:hover {
