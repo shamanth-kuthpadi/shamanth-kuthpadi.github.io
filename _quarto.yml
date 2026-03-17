@@ -8,7 +8,7 @@ project:
     - "!CLAUDE.md"
 
 website:
-  title: "Shamanth Kuthpadi S."
+  title: "Shamanth Kuthpadi"
   description: "Shamanth Kuthpadi's academic home page"
   site-url: https://shamanthkuthpadi.com
   open-graph: true

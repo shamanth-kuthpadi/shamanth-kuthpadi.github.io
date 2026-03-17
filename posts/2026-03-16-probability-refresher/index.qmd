@@ -1,0 +1,363 @@
+---
+title: "Probability for Randomized Algorithms"
+author: "Shamanth Kuthpadi S."
+date: "2026-03-16"
+categories: [math, algorithms, machine learning]
+image: "probability-refresher.jpg"
+draft: false
+---
+
+# Probability for Randomized Algorithms
+
+I always seem to need to refresh my probability theory knowledge and thought that writing some of the core concepts might be useful for myself and for you as well. Since I usually understand concepts best in lay-person terms, I will try to adhere to that in the rest of this post. I think it's also useful to note that this is not a overarching probability manual in terms of including all possible concepts in probability. Instead, most of the concepts discussed here are very much useful within the domain of **randomized algorithms**. 
+
+With respect to background knowledge -- I will try to ensure that this document is self-contained but it may be useful to search things up if things are confusing.
+
+*Contents are adapted from material produce by Prof. Srini Devadas, Prof. Hung Le, Prof. Cameron Musco.*
+
+***AI Usage Notice** --  I wrote all of the contents of this post but AI was used for spell check and reorganization.*
+
+### Basic Terminology
+
+##### Random Experiment
+A **random experiment** is a process that produces an outcome that cannot be predicted with certainty beforehand.
+
+Examples:
+
+- Flipping a coin
+- Rolling a die
+
+---
+
+##### Sample Space
+The **sample space** is the set of **all possible outcomes** of an experiment.
+
+Notation: $S$ or $\Omega$
+
+Examples:
+
+- Coin flip: $S = \{H, T\}$
+- Die roll: $S = \{1,2,3,4,5,6\}$
+
+---
+
+##### Outcome
+An **outcome** is a **single possible result** of an experiment.
+
+Notation: $O$
+
+Example:  
+
+If rolling a die, the outcome $4$ is one element of the sample space.
+
+---
+
+##### Event
+An **event** is a **subset of the sample space**.
+
+Notation: $E$
+
+Example:
+
+Let  
+$$
+E = \{2,4,6\}
+$$
+
+represent the event of rolling an **even number** on a die.
+
+Types of events:
+
+- **Simple event:** one outcome
+- **Compound event:** multiple outcomes
+
+---
+
+##### Probability
+The **probability of an event** measures how likely the event is to occur.
+
+Notation: $P$
+
+For equally likely outcomes:
+
+$$
+P(A) = \frac{\text{number of favorable outcomes}}{\text{total outcomes}}
+$$
+
+Properties:
+
+- $0 \le P(A) \le 1$
+- $P(S) = 1$
+- $P(\emptyset) = 0$
+
+---
+
+##### Complement of an Event
+The **complement** of event $A$ is the event that **$A$ does not occur**.
+
+Notation:
+
+$$
+A^c
+$$
+
+Probability rule:
+
+$$
+P(A^c) = 1 - P(A)
+$$
+
+---
+
+##### Union of Events
+The **union** of two events means **$A$ or $B$ occurs (or both)**.
+
+Notation:
+
+$$
+A \cup B
+$$
+
+Addition rule:
+
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+$$
+
+---
+
+##### Intersection of Events
+The **intersection** means **both events occur**.
+
+Notation:
+
+$$
+A \cap B
+$$
+
+Example:
+
+- $A =$ roll an even number  
+- $B =$ roll greater than 3  
+
+Then
+
+$$
+A \cap B = \{4,6\}
+$$
+
+---
+
+##### Conditional Probability
+The **conditional probability** of $A$ given $B$ is defined as
+
+$$
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+provided that $P(B) > 0$.
+
+---
+
+##### Independent Events
+Two events $A$ and $B$ are **independent** if the occurrence of one does not affect the probability of the other.
+
+Definition:
+
+$$
+P(A \cap B) = P(A)P(B)
+$$
+
+Example:  
+Two separate coin flips.
+
+---
+
+##### Random Variable
+A **random variable** is a function that assigns a **numerical value to each outcome** of an experiment.
+
+Types:
+
+- **Discrete random variable:** countable values
+- **Continuous random variable:** values in an interval
+
+Examples:
+
+- Number of heads in three coin flips
+- Time until a light bulb fails
+
+---
+
+##### Probability Distribution
+A **probability distribution** describes how probabilities are assigned to the values of a random variable.
+
+Types:
+
+- **PMF (Probability Mass Function)** for discrete variables
+- **PDF (Probability Density Function)** for continuous variables
+
+---
+
+##### Expected Value
+The **expected value** (or mean) of a random variable represents the long-run average value.
+
+For a discrete random variable:
+
+$$
+E[X] = \sum_x x P(X=x)
+$$
+
+---
+
+##### Variance
+The **variance** measures the spread of a random variable around its expected value.
+
+$$
+\text{Var}(X) = E[(X - E[X])^2]
+$$
+
+---
+
+---
+
+### Linearity of Expectation
+
+##### *Theorem.* 
+
+$E[X + Y] = E[X] + E[Y]$ for any two random variables $X$ and $Y$.
+
+##### *Proof.*
+
+$$
+E[Z] = \sum_z z\cdot P(Z=z)
+$$
+
+Now substitute $X+Y$ for $Z$.
+$$
+E[X + Y] = \sum_x \sum_y (x+y) \cdot P(X=x \cap Y=y)
+$$
+
+$$
+E[X + Y] = \sum_x \sum_y x \cdot P(X=x \cap Y=y) + \sum_x \sum_y y \cdot P(X=x \cap Y=y)
+$$
+
+$$
+E[X + Y] = \sum_x x \cdot P(X=x) + \sum_y y \cdot P(Y=y)
+$$
+
+$$
+E[X + Y] = E[X] + E[Y]
+$$
+
+---
+
+---
+
+### Linearity of Variance
+
+##### *Lemma I*.
+
+$$
+\text{Var}(X) = E[X^2] - E[X]^2
+$$
+
+##### *Proof for Lemma I*.
+
+$$
+\text{Var}(X) = E[(X - E[X])^2]
+$$
+Let $\mu = E[X]$
+$$
+= E[(X - \mu)^2]
+$$
+$$
+= E[X^2 - 2\mu\cdot X + \mu^2]
+$$
+By **linearity of expectation**
+$$
+= E[X^2] + E[-2\mu\cdot X] + E[\mu^2] 
+$$
+Note that $\mu$ is already the expectation and so taking the expectation of expectation will not change the value.
+$$
+= E[X^2] -2\mu\cdot E[X] + \mu^2 
+$$
+Now substitute back in $E[X]$ for $\mu$.
+$$
+= E[X^2] -2\cdot E[X]\cdot E[X] + E[X]^2 
+$$
+$$
+= E[X^2] -2\cdot E[X]^2 + E[X]^2 
+$$
+$$
+\text{Var}(X) = E[X^2] - E[X]^2
+$$
+
+---
+
+##### *Lemma II*.
+
+$$
+E[X\cdot Y] = E[X]\cdot E[Y] \text{ for any two independent random variables } X \text{ and } Y
+$$
+
+##### *Proof for Lemma II*.
+
+$$
+E[Z] = \sum_z z\cdot P(Z=z)
+$$
+Now substitute $X\cdot Y$ for $Z$.
+$$
+E[X\cdot Y] = \sum_x \sum_y x\cdot y\cdot P(X=x \cap Y=y)
+$$
+Since $X$ and $Y$ are independent $P(X=x \cap Y=y) = P(X=x)\cdot P(Y=y)$
+$$
+= \sum_x \sum_y x\cdot y\cdot P(X=x)\cdot P(Y=y)
+$$
+$$
+= \sum_x x\cdot P(X=x) \times \sum_y y\cdot P(Y=y)
+$$
+Realize that the components are expectations.
+$$
+E[X\cdot Y] = E[X]\cdot E[Y]
+$$
+
+---
+
+##### *Theorem.* 
+
+$\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)$ for any two *independent* random variables $X$ and $Y$.
+
+##### *Proof*.
+Following from **Lemma I**.
+$$
+\text{Var}(Z) = E[Z^2] - E[Z]^2
+$$
+Now substitute $X+Y$ for $Z$.
+$$
+\text{Var}(X + Y) = E[(X + Y)^2] - E[X+Y]^2
+$$
+Apply **linearity of expectation**.
+$$
+= E[X^2 + 2\cdot XY + Y^2] - (E[X] + E[Y])^2
+$$
+$$
+= E[X^2] + 2\cdot E[XY] + E[Y^2] - (E[X] + E[Y])^2
+$$
+$$
+= E[X^2] + 2\cdot E[XY] + E[Y^2] - (E[X]^2 + 2\cdot E[X]\cdot E[Y] + E[Y]^2)
+$$
+$$
+= E[X^2] + 2\cdot E[XY] + E[Y^2] - E[X]^2 - 2\cdot E[X]\cdot E[Y] - E[Y]^2
+$$
+Following from **Lemma II**.
+$$
+= E[X^2] + 2\cdot E[X]\cdot E[Y] + E[Y^2] - E[X]^2 - 2\cdot E[X]\cdot E[Y] - E[Y]^2
+$$
+$$
+= E[X^2] + E[Y^2] - E[X]^2 - E[Y]^2
+$$
+$$
+= (E[X^2] - E[X]^2) + (E[Y^2]- E[Y]^2)
+$$
+
+$\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)$

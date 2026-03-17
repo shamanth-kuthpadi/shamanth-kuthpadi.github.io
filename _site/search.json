@@ -21,6 +21,20 @@
     "text": "Our problem setting is to take an audio recording (could be stored in a file) and process it as a stream that can be tagged with an audio tagger.\nIn this setting, when we say we want streaming, we mean: “I want my system to behave as if audio is arriving live, even though it’s coming from a file.”\nWhen we say we want an audio tagger, we mean: “I want my system to be a model that can take as input a piece of audio (whether that be as an embedding or another compression) and can classify what that audio piece is.”\nThis implies three constraints:\n\nCausality: future samples stay hidden with no knowledge of them\nTime alignment: audio processing must be close-to or on par with a real-time clock\nIncremental inference: our model sees overlapping overtime\n\nThe buffer must:\n\nAlways contain the most recent N samples\nDiscard old samples automatically\nTrigger inference at fixed intervals\n\nThis is called a ring buffer or sliding window buffer.\nThere are three time scales to keep in mind.\n\nStream chunk – to simulate the real-timeness aspect\nModel window – what the model actually takes as input\nHop size – how often the model predicts/tags\n\nFollowing from these scales, the general streaming procedure is to:\n\nRead a small chunk of audio\nAppend chunk to buffer\n\nif buffer is full:\n\ncheck if hop interval elapsed\n\nYes? perform model inference\n\n\n\nWait a correct amount of real-time\nRepeat\n\n\n# Tagging model (you should replace with your own model)\ndef tag(window):\n    print(f\"Tag for: {window.shape}\")\n\n\n# Parameters\nSR = 16000\nCHUNK_SIZE = 512          # 512 samples / 16000 Hz = 32 ms\nWINDOW_SIZE = SR * 4      # 4 seconds\nHOP_SIZE = SR * 2         # 2 seconds\n\n\n# Ring buffer\nfrom collections import deque\n\nbuffer = deque(maxlen=WINDOW_SIZE)\nsamples_since_last_inference = 0\n\n\n# Streaming loop\nimport soundfile as sf\nimport numpy as np\nimport time\n\nchunk_duration = CHUNK_SIZE / SR\nnext_time = time.monotonic()\n\nfor start in range(0, len(audio), CHUNK_SIZE):\n    chunk = audio[start:start + CHUNK_SIZE]\n    \n    # append to buffer\n    buffer.extend(chunk)\n    samples_since_last_inference += len(chunk)\n\n    # run inference if window is ready & hop elapsed\n    if len(buffer) == WINDOW_SIZE and samples_since_last_inference &gt;= HOP_SIZE:\n        samples_since_last_inference = 0\n        window = np.array(buffer)\n        tag(window)\n\n    # enforce real-time\n    next_time += chunk_duration\n    sleep = next_time - time.monotonic()\n    if sleep &gt; 0:\n        time.sleep(sleep)\n\nTag for: (64000,)\nTag for: (64000,)\nTag for: (64000,)\nTag for: (64000,)\nTag for: (64000,)\nTag for: (64000,)\n\n\nNote that since our hop size was 2 seconds, the model predicts every 2 seconds and thus 7 tags."
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Shamanth Kuthpadi",
+    "section": "",
+    "text": "Linkedin\n  \n  \n    \n     github\n  \n\n  \n  \nAbout Me\nI am a computer science graduate student at the Manning College of Information and Computer Sciences in UMass Amherst. I am fortunate enough to be advised by Prof. Deepak Ganesan.\nMy research interests lie in developing end-to-end machine learning pipelines that can be leveraged for impactful advancements in healthcare. The hope is that, by doing so, I can help optimize healthcare outcomes and ultimately compute for the common good. I also have a keen interest in designing these ML pipelines in an explainable and interpretable way (whenever possible).\nI am also a part-time research intern under the supervision of Dr. Daniel D. Corkill at IOMICS Corporation, where I focus on building automated casual discovery/estimation pipelines and researching Kolmogorov-Arnold Networks (KANs) for their applicability in the unsupervised and supervised domains.\n\n\n\n\n\nNews\n\n\nJanuary 2025: VYRE paper was accepted to Sensys26.\n\n\nJanuary 2025: PhD mentor for COMPSCI 698DS.\n\n\nJanuary 2025: Submitted Hallucination Detection-Guided Preference Optimization for Clinical Summarization to ACL ARR 2026.\n\n\nNovember 2025: Admitted to UMass Amherst to pursue a PhD in Computer Science under the supervision of Dr. Deepak Ganesan. I would like to firstly thank my parents for supporting me through this journey and I would also like to thank Prof. Ganesan for taking a chance on me. Special thanks to Dr. Daniel D. Corkill and Prof. Cameron Musco for their supervision through the procedure as well.\n\n\nAugust 2025: Finally “finished” creating my personal website.\n\n\nFebruary 2025: Working under the supervision of Prof. Deepak Ganesan and with Wireless and Sensor Systems Lab to create a multi-modal system for real-time 3D facial animation from physiological signals.\n\n\nJanuary 2025: Working with Mendel.ai to mitigate hallucinations in clinical summarization using synthetic data generation and preference tuning.\n\n\nJanuary 2025: Starting my Master’s in Computer Science at the University of Massachusetts Amherst\n\n\nDecember 2024: Graduated with a Bachelor’s degree in Computer Science from the University of Massachusetts Amherst\n\n\nSeptember 2024: Began my Independent Study in modeling and analyzing structural brain connectomes under the supervision of Cameron Musco\n\n\nJune 2024: Started working as a Machine Learning Research Intern at IOMICS Corporation\n\n\nSeptember 2021: Started my undergraduate degree in Computer Science at the University of Massachusetts Amherst\n\n\n\n\n\nSelected Publications & Current Research\n\nHallucination Detection-Guided Preference Optimization for Clinical Summarization\nS.K. Seethakantha, D.N. Thai, S. Tiwari, V.P. Gudi, R. Matar, W. Zhao, A. Mitra, W. Salloum, A. McCallum\nSubmitted to ACL ARR 2026\n\n\nA Smart Electrode-Integrated Cooling Patch for Motion-Robust ECG Monitoring and Real-Time 3D Facial Animation\nT. Q. Trung, S. K. Seethakantha, Z. Lei, A. Radmehr, P. Nguyen, D. Ganesan\nSubmitted to Advanced Healthcare Materials\n\n\nArtificial Intelligence and Discovery Automation: Path to Democratizing Science\nJ. Gormley, D. Corkill, E. Hinderer, S. K. Seethakantha, T. Zisk\nSubmitted to International Conference on Systems Biology (ICSB)"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "just a compilation of my academic and personal writing",
+    "section": "",
+    "text": "Still updating this but a lot more to come so stay tuned!\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nProbability for Randomized Algorithms\n\n\n\n\n\n\nShamanth Kuthpadi S.\n\n\nMar 16, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nStreaming Offline Audio for Online Audio Tagging\n\n\n\n\n\n\nShamanth Kuthpadi S.\n\n\nJan 12, 2026\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "contact.html",
     "href": "contact.html",
     "title": "Contact",
@@ -28,17 +42,115 @@
     "text": "If any of what I do interests you, get in touch.\n\n\nEmail: shamanth.kuthpadi@gmail.com\nLinkedIn: Shamanth Kuthpadi\nGitHub: shamanth-kuthpadi"
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "just a compilation of my academic and personal writing",
+    "objectID": "posts/2026-03-16-probability-refresher/index.html",
+    "href": "posts/2026-03-16-probability-refresher/index.html",
+    "title": "Probability for Randomized Algorithms",
     "section": "",
-    "text": "Still updating this but a lot more to come so stay tuned!\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nStreaming Offline Audio for Online Audio Tagging\n\n\n\n\n\n\nShamanth Kuthpadi S.\n\n\nJan 12, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "Probability for Randomized Algorithms\nI always seem to need to refresh my probability theory knowledge and thought that writing some of the core concepts might be useful for myself and for you as well. Since I usually understand concepts best in lay-person terms, I will try to adhere to that in the rest of this post. I think it’s also useful to note that this is not a overarching probability manual in terms of including all possible concepts in probability. Instead, most of the concepts discussed here are very much useful within the domain of randomized algorithms.\nWith respect to background knowledge – I will try to ensure that this document is self-contained but it may be useful to search things up if things are confusing.\nContents are adapted from material produce by Prof. Srini Devadas, Prof. Hung Le, Prof. Cameron Musco.\nAI Usage Notice – I wrote all of the contents of this post but AI was used for spell check and reorganization.\n\nBasic Terminology\n\nRandom Experiment\nA random experiment is a process that produces an outcome that cannot be predicted with certainty beforehand.\nExamples:\n\nFlipping a coin\nRolling a die\n\n\n\n\nSample Space\nThe sample space is the set of all possible outcomes of an experiment.\nNotation: \\(S\\) or \\(\\Omega\\)\nExamples:\n\nCoin flip: \\(S = \\{H, T\\}\\)\nDie roll: \\(S = \\{1,2,3,4,5,6\\}\\)\n\n\n\n\nOutcome\nAn outcome is a single possible result of an experiment.\nNotation: \\(O\\)\nExample:\nIf rolling a die, the outcome \\(4\\) is one element of the sample space.\n\n\n\nEvent\nAn event is a subset of the sample space.\nNotation: \\(E\\)\nExample:\nLet\n\\[\nE = \\{2,4,6\\}\n\\]\nrepresent the event of rolling an even number on a die.\nTypes of events:\n\nSimple event: one outcome\nCompound event: multiple outcomes\n\n\n\n\nProbability\nThe probability of an event measures how likely the event is to occur.\nNotation: \\(P\\)\nFor equally likely outcomes:\n\\[\nP(A) = \\frac{\\text{number of favorable outcomes}}{\\text{total outcomes}}\n\\]\nProperties:\n\n\\(0 \\le P(A) \\le 1\\)\n\\(P(S) = 1\\)\n\\(P(\\emptyset) = 0\\)\n\n\n\n\nComplement of an Event\nThe complement of event \\(A\\) is the event that \\(A\\) does not occur.\nNotation:\n\\[\nA^c\n\\]\nProbability rule:\n\\[\nP(A^c) = 1 - P(A)\n\\]\n\n\n\nUnion of Events\nThe union of two events means \\(A\\) or \\(B\\) occurs (or both).\nNotation:\n\\[\nA \\cup B\n\\]\nAddition rule:\n\\[\nP(A \\cup B) = P(A) + P(B) - P(A \\cap B)\n\\]\n\n\n\nIntersection of Events\nThe intersection means both events occur.\nNotation:\n\\[\nA \\cap B\n\\]\nExample:\n\n\\(A =\\) roll an even number\n\n\\(B =\\) roll greater than 3\n\nThen\n\\[\nA \\cap B = \\{4,6\\}\n\\]\n\n\n\nConditional Probability\nThe conditional probability of \\(A\\) given \\(B\\) is defined as\n\\[\nP(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}\n\\]\nprovided that \\(P(B) &gt; 0\\).\n\n\n\nIndependent Events\nTwo events \\(A\\) and \\(B\\) are independent if the occurrence of one does not affect the probability of the other.\nDefinition:\n\\[\nP(A \\cap B) = P(A)P(B)\n\\]\nExample:\nTwo separate coin flips.\n\n\n\nRandom Variable\nA random variable is a function that assigns a numerical value to each outcome of an experiment.\nTypes:\n\nDiscrete random variable: countable values\nContinuous random variable: values in an interval\n\nExamples:\n\nNumber of heads in three coin flips\nTime until a light bulb fails\n\n\n\n\nProbability Distribution\nA probability distribution describes how probabilities are assigned to the values of a random variable.\nTypes:\n\nPMF (Probability Mass Function) for discrete variables\nPDF (Probability Density Function) for continuous variables\n\n\n\n\nExpected Value\nThe expected value (or mean) of a random variable represents the long-run average value.\nFor a discrete random variable:\n\\[\nE[X] = \\sum_x x P(X=x)\n\\]\n\n\n\nVariance\nThe variance measures the spread of a random variable around its expected value.\n\\[\n\\text{Var}(X) = E[(X - E[X])^2]\n\\]\n\n\n\n\n\nLinearity of Expectation\n\nTheorem.\n\\(E[X + Y] = E[X] + E[Y]\\) for any two random variables \\(X\\) and \\(Y\\).\n\n\nProof.\n\\[\nE[Z] = \\sum_z z\\cdot P(Z=z)\n\\]\nNow substitute \\(X+Y\\) for \\(Z\\). \\[\nE[X + Y] = \\sum_x \\sum_y (x+y) \\cdot P(X=x \\cap Y=y)\n\\]\n\\[\nE[X + Y] = \\sum_x \\sum_y x \\cdot P(X=x \\cap Y=y) + \\sum_x \\sum_y y \\cdot P(X=x \\cap Y=y)\n\\]\n\\[\nE[X + Y] = \\sum_x x \\cdot P(X=x) + \\sum_y y \\cdot P(Y=y)\n\\]\n\\[\nE[X + Y] = E[X] + E[Y]\n\\]\n\n\n\n\n\nLinearity of Variance\n\nLemma I.\n\\[\n\\text{Var}(X) = E[X^2] - E[X]^2\n\\]\n\n\nProof for Lemma I.\n\\[\n\\text{Var}(X) = E[(X - E[X])^2]\n\\] Let \\(\\mu = E[X]\\) \\[\n= E[(X - \\mu)^2]\n\\] \\[\n= E[X^2 - 2\\mu\\cdot X + \\mu^2]\n\\] By linearity of expectation \\[\n= E[X^2] + E[-2\\mu\\cdot X] + E[\\mu^2]\n\\] Note that \\(\\mu\\) is already the expectation and so taking the expectation of expectation will not change the value. \\[\n= E[X^2] -2\\mu\\cdot E[X] + \\mu^2\n\\] Now substitute back in \\(E[X]\\) for \\(\\mu\\). \\[\n= E[X^2] -2\\cdot E[X]\\cdot E[X] + E[X]^2\n\\] \\[\n= E[X^2] -2\\cdot E[X]^2 + E[X]^2\n\\] \\[\n\\text{Var}(X) = E[X^2] - E[X]^2\n\\]\n\n\n\nLemma II.\n\\[\nE[X\\cdot Y] = E[X]\\cdot E[Y] \\text{ for any two independent random variables } X \\text{ and } Y\n\\]\n\n\nProof for Lemma II.\n\\[\nE[Z] = \\sum_z z\\cdot P(Z=z)\n\\] Now substitute \\(X\\cdot Y\\) for \\(Z\\). \\[\nE[X\\cdot Y] = \\sum_x \\sum_y x\\cdot y\\cdot P(X=x \\cap Y=y)\n\\] Since \\(X\\) and \\(Y\\) are independent \\(P(X=x \\cap Y=y) = P(X=x)\\cdot P(Y=y)\\) \\[\n= \\sum_x \\sum_y x\\cdot y\\cdot P(X=x)\\cdot P(Y=y)\n\\] \\[\n= \\sum_x x\\cdot P(X=x) \\times \\sum_y y\\cdot P(Y=y)\n\\] Realize that the components are expectations. \\[\nE[X\\cdot Y] = E[X]\\cdot E[Y]\n\\]\n\n\n\nTheorem.\n\\(\\text{Var}(X + Y) = \\text{Var}(X) + \\text{Var}(Y)\\) for any two independent random variables \\(X\\) and \\(Y\\).\n\n\nProof.\nFollowing from Lemma I. \\[\n\\text{Var}(Z) = E[Z^2] - E[Z]^2\n\\] Now substitute \\(X+Y\\) for \\(Z\\). \\[\n\\text{Var}(X + Y) = E[(X + Y)^2] - E[X+Y]^2\n\\] Apply linearity of expectation. \\[\n= E[X^2 + 2\\cdot XY + Y^2] - (E[X] + E[Y])^2\n\\] \\[\n= E[X^2] + 2\\cdot E[XY] + E[Y^2] - (E[X] + E[Y])^2\n\\] \\[\n= E[X^2] + 2\\cdot E[XY] + E[Y^2] - (E[X]^2 + 2\\cdot E[X]\\cdot E[Y] + E[Y]^2)\n\\] \\[\n= E[X^2] + 2\\cdot E[XY] + E[Y^2] - E[X]^2 - 2\\cdot E[X]\\cdot E[Y] - E[Y]^2\n\\] Following from Lemma II. \\[\n= E[X^2] + 2\\cdot E[X]\\cdot E[Y] + E[Y^2] - E[X]^2 - 2\\cdot E[X]\\cdot E[Y] - E[Y]^2\n\\] \\[\n= E[X^2] + E[Y^2] - E[X]^2 - E[Y]^2\n\\] \\[\n= (E[X^2] - E[X]^2) + (E[Y^2]- E[Y]^2)\n\\]\n\\(\\text{Var}(X + Y) = \\text{Var}(X) + \\text{Var}(Y)\\)"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Shamanth Kuthpadi",
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#random-experiment",
+    "href": "posts/2026-03-16-probability-refresher/index.html#random-experiment",
+    "title": "Probability for Randomized Algorithms",
     "section": "",
-    "text": "Linkedin\n  \n  \n    \n     github\n  \n\n  \n  \nAbout Me\nI am a computer science graduate student at the Manning College of Information and Computer Sciences in UMass Amherst. I am fortunate enough to be advised by Prof. Deepak Ganesan.\nMy research interests lie in developing end-to-end machine learning pipelines that can be leveraged for impactful advancements in healthcare. The hope is that, by doing so, I can help optimize healthcare outcomes and ultimately compute for the common good. I also have a keen interest in designing these ML pipelines in an explainable and interpretable way (whenever possible).\nI am also a part-time research intern under the supervision of Dr. Daniel D. Corkill at IOMICS Corporation, where I focus on building automated casual discovery/estimation pipelines and researching Kolmogorov-Arnold Networks (KANs) for their applicability in the unsupervised and supervised domains.\n\n\n\n\n\nNews\n\n\nJanuary 2025: VYRE paper was accepted to Sensys26.\n\n\nJanuary 2025: PhD mentor for COMPSCI 698DS.\n\n\nJanuary 2025: Submitted Hallucination Detection-Guided Preference Optimization for Clinical Summarization to ACL ARR 2026.\n\n\nNovember 2025: Admitted to UMass Amherst to pursue a PhD in Computer Science under the supervision of Dr. Deepak Ganesan. I would like to firstly thank my parents for supporting me through this journey and I would also like to thank Prof. Ganesan for taking a chance on me. Special thanks to Dr. Daniel D. Corkill and Prof. Cameron Musco for their supervision through the procedure as well.\n\n\nAugust 2025: Finally “finished” creating my personal website.\n\n\nFebruary 2025: Working under the supervision of Prof. Deepak Ganesan and with Wireless and Sensor Systems Lab to create a multi-modal system for real-time 3D facial animation from physiological signals.\n\n\nJanuary 2025: Working with Mendel.ai to mitigate hallucinations in clinical summarization using synthetic data generation and preference tuning.\n\n\nJanuary 2025: Starting my Master’s in Computer Science at the University of Massachusetts Amherst\n\n\nDecember 2024: Graduated with a Bachelor’s degree in Computer Science from the University of Massachusetts Amherst\n\n\nSeptember 2024: Began my Independent Study in modeling and analyzing structural brain connectomes under the supervision of Cameron Musco\n\n\nJune 2024: Started working as a Machine Learning Research Intern at IOMICS Corporation\n\n\nSeptember 2021: Started my undergraduate degree in Computer Science at the University of Massachusetts Amherst\n\n\n\n\n\nSelected Publications & Current Research\n\nHallucination Detection-Guided Preference Optimization for Clinical Summarization\nS.K. Seethakantha, D.N. Thai, S. Tiwari, V.P. Gudi, R. Matar, W. Zhao, A. Mitra, W. Salloum, A. McCallum\nSubmitted to ACL ARR 2026\n\n\nA Smart Electrode-Integrated Cooling Patch for Motion-Robust ECG Monitoring and Real-Time 3D Facial Animation\nT. Q. Trung, S. K. Seethakantha, Z. Lei, A. Radmehr, P. Nguyen, D. Ganesan\nSubmitted to Advanced Healthcare Materials\n\n\nArtificial Intelligence and Discovery Automation: Path to Democratizing Science\nJ. Gormley, D. Corkill, E. Hinderer, S. K. Seethakantha, T. Zisk\nSubmitted to International Conference on Systems Biology (ICSB)"
+    "text": "A random experiment is a process that produces an outcome that cannot be predicted with certainty beforehand.\nExamples: - Flipping a coin - Rolling a die"
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#sample-space",
+    "href": "posts/2026-03-16-probability-refresher/index.html#sample-space",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "The sample space is the set of all possible outcomes of an experiment.\nNotation: \\(S\\) or \\(\\Omega\\)\nExamples: - Coin flip: \\(S = \\{H, T\\}\\) - Die roll: \\(S = \\{1,2,3,4,5,6\\}\\)"
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#outcome",
+    "href": "posts/2026-03-16-probability-refresher/index.html#outcome",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "An outcome is a single possible result of an experiment.\nExample:\nIf rolling a die, the outcome \\(4\\) is one element of the sample space."
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#event",
+    "href": "posts/2026-03-16-probability-refresher/index.html#event",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "An event is a subset of the sample space.\nExample:\nLet\n\\[\nE = \\{2,4,6\\}\n\\]\nrepresent the event of rolling an even number on a die.\nTypes of events:\n\nSimple event: one outcome\nCompound event: multiple outcomes"
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#probability",
+    "href": "posts/2026-03-16-probability-refresher/index.html#probability",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "The probability of an event measures how likely the event is to occur.\nFor equally likely outcomes:\n\\[\nP(A) = \\frac{\\text{number of favorable outcomes}}{\\text{total outcomes}}\n\\]\nProperties:\n\n\\(0 \\le P(A) \\le 1\\)\n\\(P(S) = 1\\)\n\\(P(\\emptyset) = 0\\)"
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#complement-of-an-event",
+    "href": "posts/2026-03-16-probability-refresher/index.html#complement-of-an-event",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "The complement of event \\(A\\) is the event that \\(A\\) does not occur.\nNotation:\n\\[\nA^c\n\\]\nProbability rule:\n\\[\nP(A^c) = 1 - P(A)\n\\]"
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#union-of-events",
+    "href": "posts/2026-03-16-probability-refresher/index.html#union-of-events",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "The union of two events means \\(A\\) or \\(B\\) occurs (or both).\nNotation:\n\\[\nA \\cup B\n\\]\nAddition rule:\n\\[\nP(A \\cup B) = P(A) + P(B) - P(A \\cap B)\n\\]"
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#intersection-of-events",
+    "href": "posts/2026-03-16-probability-refresher/index.html#intersection-of-events",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "The intersection means both events occur.\nNotation:\n\\[\nA \\cap B\n\\]\nExample:\n\n\\(A =\\) roll an even number\n\n\\(B =\\) roll greater than 3\n\nThen\n\\[\nA \\cap B = \\{4,6\\}\n\\]"
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#conditional-probability",
+    "href": "posts/2026-03-16-probability-refresher/index.html#conditional-probability",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "The conditional probability of \\(A\\) given \\(B\\) is defined as\n\\[\nP(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}\n\\]\nprovided that \\(P(B) &gt; 0\\)."
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#independent-events",
+    "href": "posts/2026-03-16-probability-refresher/index.html#independent-events",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "Two events \\(A\\) and \\(B\\) are independent if the occurrence of one does not affect the probability of the other.\nDefinition:\n\\[\nP(A \\cap B) = P(A)P(B)\n\\]\nExample:\nTwo separate coin flips."
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#random-variable",
+    "href": "posts/2026-03-16-probability-refresher/index.html#random-variable",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "A random variable is a function that assigns a numerical value to each outcome of an experiment.\nTypes:\n\nDiscrete random variable: countable values\nContinuous random variable: values in an interval\n\nExamples:\n\nNumber of heads in three coin flips\nTime until a light bulb fails"
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#probability-distribution",
+    "href": "posts/2026-03-16-probability-refresher/index.html#probability-distribution",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "A probability distribution describes how probabilities are assigned to the values of a random variable.\nTypes:\n\nPMF (Probability Mass Function) for discrete variables\nPDF (Probability Density Function) for continuous variables"
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#expected-value",
+    "href": "posts/2026-03-16-probability-refresher/index.html#expected-value",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "The expected value (or mean) of a random variable represents the long-run average value.\nFor a discrete random variable:\n\\[\nE[X] = \\sum_x x P(X=x)\n\\]"
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#variance",
+    "href": "posts/2026-03-16-probability-refresher/index.html#variance",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "The variance measures the spread of a random variable around its expected value.\n\\[\n\\text{Var}(X) = E[(X - E[X])^2]\n\\]"
+  },
+  {
+    "objectID": "posts/2026-03-16-probability-refresher/index.html#basic-terminology",
+    "href": "posts/2026-03-16-probability-refresher/index.html#basic-terminology",
+    "title": "Probability for Randomized Algorithms",
+    "section": "",
+    "text": "A random experiment is a process that produces an outcome that cannot be predicted with certainty beforehand.\nExamples: - Flipping a coin - Rolling a die\n\n\n\n\nThe sample space is the set of all possible outcomes of an experiment.\nNotation: \\(S\\) or \\(\\Omega\\)\nExamples: - Coin flip: \\(S = \\{H, T\\}\\) - Die roll: \\(S = \\{1,2,3,4,5,6\\}\\)\n\n\n\n\nAn outcome is a single possible result of an experiment.\nExample:\nIf rolling a die, the outcome \\(4\\) is one element of the sample space.\n\n\n\n\nAn event is a subset of the sample space.\nExample:\nLet\n\\[\nE = \\{2,4,6\\}\n\\]\nrepresent the event of rolling an even number on a die.\nTypes of events:\n\nSimple event: one outcome\nCompound event: multiple outcomes\n\n\n\n\n\nThe probability of an event measures how likely the event is to occur.\nFor equally likely outcomes:\n\\[\nP(A) = \\frac{\\text{number of favorable outcomes}}{\\text{total outcomes}}\n\\]\nProperties:\n\n\\(0 \\le P(A) \\le 1\\)\n\\(P(S) = 1\\)\n\\(P(\\emptyset) = 0\\)\n\n\n\n\n\nThe complement of event \\(A\\) is the event that \\(A\\) does not occur.\nNotation:\n\\[\nA^c\n\\]\nProbability rule:\n\\[\nP(A^c) = 1 - P(A)\n\\]\n\n\n\n\nThe union of two events means \\(A\\) or \\(B\\) occurs (or both).\nNotation:\n\\[\nA \\cup B\n\\]\nAddition rule:\n\\[\nP(A \\cup B) = P(A) + P(B) - P(A \\cap B)\n\\]\n\n\n\n\nThe intersection means both events occur.\nNotation:\n\\[\nA \\cap B\n\\]\nExample:\n\n\\(A =\\) roll an even number\n\n\\(B =\\) roll greater than 3\n\nThen\n\\[\nA \\cap B = \\{4,6\\}\n\\]\n\n\n\n\nThe conditional probability of \\(A\\) given \\(B\\) is defined as\n\\[\nP(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}\n\\]\nprovided that \\(P(B) &gt; 0\\).\n\n\n\n\nTwo events \\(A\\) and \\(B\\) are independent if the occurrence of one does not affect the probability of the other.\nDefinition:\n\\[\nP(A \\cap B) = P(A)P(B)\n\\]\nExample:\nTwo separate coin flips.\n\n\n\n\nA random variable is a function that assigns a numerical value to each outcome of an experiment.\nTypes:\n\nDiscrete random variable: countable values\nContinuous random variable: values in an interval\n\nExamples:\n\nNumber of heads in three coin flips\nTime until a light bulb fails\n\n\n\n\n\nA probability distribution describes how probabilities are assigned to the values of a random variable.\nTypes:\n\nPMF (Probability Mass Function) for discrete variables\nPDF (Probability Density Function) for continuous variables\n\n\n\n\n\nThe expected value (or mean) of a random variable represents the long-run average value.\nFor a discrete random variable:\n\\[\nE[X] = \\sum_x x P(X=x)\n\\]\n\n\n\n\nThe variance measures the spread of a random variable around its expected value.\n\\[\n\\text{Var}(X) = E[(X - E[X])^2]\n\\]"
   }
 ]
