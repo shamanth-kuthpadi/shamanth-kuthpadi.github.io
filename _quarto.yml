@@ -20,6 +20,8 @@ website:
         text: Home
       - text: Blog
         href: blog.qmd
+      - text: Contact
+        href: contact.qmd
       - text: CV
         href: CV.pdf
   page-footer:

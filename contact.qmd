@@ -3,10 +3,10 @@ title: "Contact"
 format: html
 ---
 
-If any of what I do interests you, get in touch.
+If any of what I do interests you, let's get in touch.
 
 ::: {.contact-info}
-- **Email**: [shamanth.kuthpadi@gmail.com](mailto:shamanth.kuthpadi@gmail.com)
-- **LinkedIn**: [Shamanth Kuthpadi](https://www.linkedin.com/in/shamanth-kuthpadi/)
+- **Email**: [skuthpadi@umass.edu](mailto:skuthpadi@umass.edu)
+- **LinkedIn**: [Shamanth Kuthpadi](https://www.linkedin.com/in/sham-kuthpa-c219/)
 - **GitHub**: [shamanth-kuthpadi](https://github.com/shamanth-kuthpadi)
 :::

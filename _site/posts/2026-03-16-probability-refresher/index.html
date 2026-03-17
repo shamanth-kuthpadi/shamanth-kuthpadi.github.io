@@ -355,8 +355,14 @@ window.Quarto = {
   <li><a href="#probability-for-randomized-algorithms" id="toc-probability-for-randomized-algorithms" class="nav-link active" data-scroll-target="#probability-for-randomized-algorithms">Probability for Randomized Algorithms</a>
   <ul class="collapse">
   <li><a href="#basic-terminology" id="toc-basic-terminology" class="nav-link" data-scroll-target="#basic-terminology">Basic Terminology</a></li>
+  <li><a href="#scaling-laws" id="toc-scaling-laws" class="nav-link" data-scroll-target="#scaling-laws">Scaling Laws</a></li>
   <li><a href="#linearity-of-expectation" id="toc-linearity-of-expectation" class="nav-link" data-scroll-target="#linearity-of-expectation">Linearity of Expectation</a></li>
   <li><a href="#linearity-of-variance" id="toc-linearity-of-variance" class="nav-link" data-scroll-target="#linearity-of-variance">Linearity of Variance</a></li>
+  <li><a href="#indicator-random-variables" id="toc-indicator-random-variables" class="nav-link" data-scroll-target="#indicator-random-variables">Indicator Random Variables</a></li>
+  <li><a href="#union-bound" id="toc-union-bound" class="nav-link" data-scroll-target="#union-bound">Union Bound</a></li>
+  <li><a href="#markovs-inequality" id="toc-markovs-inequality" class="nav-link" data-scroll-target="#markovs-inequality">Markov’s Inequality</a></li>
+  <li><a href="#chebyshevs-inequality" id="toc-chebyshevs-inequality" class="nav-link" data-scroll-target="#chebyshevs-inequality">Chebyshev’s Inequality</a></li>
+  <li><a href="#chernoff-bounds" id="toc-chernoff-bounds" class="nav-link" data-scroll-target="#chernoff-bounds">Chernoff Bounds</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -373,287 +379,697 @@ window.Quarto = {
 <h1>Probability for Randomized Algorithms</h1>
 <p>I always seem to need to refresh my probability theory knowledge and thought that writing some of the core concepts might be useful for myself and for you as well. Since I usually understand concepts best in lay-person terms, I will try to adhere to that in the rest of this post. I think it’s also useful to note that this is not a overarching probability manual in terms of including all possible concepts in probability. Instead, most of the concepts discussed here are very much useful within the domain of <strong>randomized algorithms</strong>.</p>
 <p>With respect to background knowledge – I will try to ensure that this document is self-contained but it may be useful to search things up if things are confusing.</p>
-<p><em>Contents are adapted from material produce by Prof.&nbsp;Srini Devadas, Prof.&nbsp;Hung Le, Prof.&nbsp;Cameron Musco.</em></p>
+<p><em>Contents are adapted from material produce by Prof.&nbsp;Srini <strong>Devadas</strong>, Prof.&nbsp;Hung <strong>Le</strong>, Prof.&nbsp;Cameron <strong>Musco</strong>.</em></p>
 <p><em><strong>AI Usage Notice</strong> – I wrote all of the contents of this post but AI was used for spell check and reorganization.</em></p>
-<section id="basic-terminology" class="level3">
-<h3 class="anchored" data-anchor-id="basic-terminology">Basic Terminology</h3>
-<section id="random-experiment" class="level5">
-<h5 class="anchored" data-anchor-id="random-experiment">Random Experiment</h5>
-<p>A <strong>random experiment</strong> is a process that produces an outcome that cannot be predicted with certainty beforehand.</p>
-<p>Examples:</p>
-<ul>
-<li>Flipping a coin</li>
-<li>Rolling a die</li>
-</ul>
-<hr>
+<section id="basic-terminology" class="level2">
+<h2 class="anchored" data-anchor-id="basic-terminology">Basic Terminology</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Experiments &amp; Events</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Probability Rules</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Random Variables</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<dl>
+<dt><strong>Random Experiment</strong> (<span class="math inline">\(S\)</span>, <span class="math inline">\(\Omega\)</span>)</dt>
+<dd>
+A process that produces an outcome that cannot be predicted with certainty beforehand. E.g., flipping a coin, rolling a die.
+</dd>
+<dt><strong>Sample Space</strong></dt>
+<dd>
+The set of all possible outcomes. Coin flip: <span class="math inline">\(S = \{H, T\}\)</span>. Die roll: <span class="math inline">\(S = \{1,2,3,4,5,6\}\)</span>.
+</dd>
+<dt><strong>Outcome</strong></dt>
+<dd>
+A single possible result of an experiment — one element of the sample space.
+</dd>
+<dt><strong>Event</strong></dt>
+<dd>
+A subset of the sample space. E.g., <span class="math inline">\(E = \{2,4,6\}\)</span> is the event of rolling an even number. Events can be <em>simple</em> (one outcome) or <em>compound</em> (multiple outcomes).
+</dd>
+</dl>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<dl>
+<dt><strong>Probability</strong> — <span class="math inline">\(P(A) = \frac{\text{favorable outcomes}}{\text{total outcomes}}\)</span></dt>
+<dd>
+Measures how likely an event is to occur. Properties: <span class="math inline">\(0 \le P(A) \le 1\)</span>, <span class="math inline">\(P(S) = 1\)</span>, <span class="math inline">\(P(\emptyset) = 0\)</span>.
+</dd>
+<dt><strong>Complement</strong> — <span class="math inline">\(P(A^c) = 1 - P(A)\)</span></dt>
+<dd>
+The event that <span class="math inline">\(A\)</span> does not occur.
+</dd>
+<dt><strong>Union</strong> — <span class="math inline">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span></dt>
+<dd>
+The event that <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> (or both) occur.
+</dd>
+<dt><strong>Intersection</strong> — <span class="math inline">\(A \cap B\)</span></dt>
+<dd>
+The event that both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> occur. E.g., if <span class="math inline">\(A =\)</span> even and <span class="math inline">\(B =\)</span> greater than 3, then <span class="math inline">\(A \cap B = \{4,6\}\)</span>.
+</dd>
+<dt><strong>Conditional Probability</strong> — <span class="math inline">\(P(A \mid B) = \frac{P(A \cap B)}{P(B)}\)</span></dt>
+<dd>
+The probability of <span class="math inline">\(A\)</span> given that <span class="math inline">\(B\)</span> has occurred, provided <span class="math inline">\(P(B) &gt; 0\)</span>.
+</dd>
+<dt><strong>Independence</strong> — <span class="math inline">\(P(A \cap B) = P(A)P(B)\)</span></dt>
+<dd>
+Two events are independent if the occurrence of one does not affect the probability of the other. E.g., two separate coin flips.
+</dd>
+</dl>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<dl>
+<dt><strong>Random Variable</strong></dt>
+<dd>
+A function that assigns a numerical value to each outcome. Can be <em>discrete</em> (countable values) or <em>continuous</em> (values in an interval).
+</dd>
+<dt><strong>Probability Distribution</strong></dt>
+<dd>
+Describes how probabilities are assigned to a random variable’s values. <strong>PMF</strong> for discrete variables, <strong>PDF</strong> for continuous variables.
+</dd>
+<dt><strong>Expected Value</strong> — <span class="math inline">\(E[X] = \sum_x x\, P(X=x)\)</span></dt>
+<dd>
+The long-run average value of a random variable.
+</dd>
+<dt><strong>Variance</strong> — <span class="math inline">\(\text{Var}(X) = E[(X - E[X])^2]\)</span></dt>
+<dd>
+Measures the spread of a random variable around its expected value.
+</dd>
+</dl>
+</div>
+</div>
+</div>
 </section>
-<section id="sample-space" class="level5">
-<h5 class="anchored" data-anchor-id="sample-space">Sample Space</h5>
-<p>The <strong>sample space</strong> is the set of <strong>all possible outcomes</strong> of an experiment.</p>
-<p>Notation: <span class="math inline">\(S\)</span> or <span class="math inline">\(\Omega\)</span></p>
-<p>Examples:</p>
-<ul>
-<li>Coin flip: <span class="math inline">\(S = \{H, T\}\)</span></li>
-<li>Die roll: <span class="math inline">\(S = \{1,2,3,4,5,6\}\)</span></li>
-</ul>
-<hr>
-</section>
-<section id="outcome" class="level5">
-<h5 class="anchored" data-anchor-id="outcome">Outcome</h5>
-<p>An <strong>outcome</strong> is a <strong>single possible result</strong> of an experiment.</p>
-<p>Notation: <span class="math inline">\(O\)</span></p>
-<p>Example:</p>
-<p>If rolling a die, the outcome <span class="math inline">\(4\)</span> is one element of the sample space.</p>
-<hr>
-</section>
-<section id="event" class="level5">
-<h5 class="anchored" data-anchor-id="event">Event</h5>
-<p>An <strong>event</strong> is a <strong>subset of the sample space</strong>.</p>
-<p>Notation: <span class="math inline">\(E\)</span></p>
-<p>Example:</p>
-<p>Let<br>
-<span class="math display">\[
-E = \{2,4,6\}
-\]</span></p>
-<p>represent the event of rolling an <strong>even number</strong> on a die.</p>
-<p>Types of events:</p>
-<ul>
-<li><strong>Simple event:</strong> one outcome</li>
-<li><strong>Compound event:</strong> multiple outcomes</li>
-</ul>
-<hr>
-</section>
-<section id="probability" class="level5">
-<h5 class="anchored" data-anchor-id="probability">Probability</h5>
-<p>The <strong>probability of an event</strong> measures how likely the event is to occur.</p>
-<p>Notation: <span class="math inline">\(P\)</span></p>
-<p>For equally likely outcomes:</p>
+<section id="scaling-laws" class="level2">
+<h2 class="anchored" data-anchor-id="scaling-laws">Scaling Laws</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Theorem (Scaling of Expectation)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(E[aX] = a\cdot E[X]\)</span> for any constant <span class="math inline">\(a\)</span> and random variable <span class="math inline">\(X\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
 <p><span class="math display">\[
-P(A) = \frac{\text{number of favorable outcomes}}{\text{total outcomes}}
+E[aX] = \sum_x (ax) \cdot P(X=x)
 \]</span></p>
-<p>Properties:</p>
-<ul>
-<li><span class="math inline">\(0 \le P(A) \le 1\)</span></li>
-<li><span class="math inline">\(P(S) = 1\)</span></li>
-<li><span class="math inline">\(P(\emptyset) = 0\)</span></li>
-</ul>
-<hr>
-</section>
-<section id="complement-of-an-event" class="level5">
-<h5 class="anchored" data-anchor-id="complement-of-an-event">Complement of an Event</h5>
-<p>The <strong>complement</strong> of event <span class="math inline">\(A\)</span> is the event that <strong><span class="math inline">\(A\)</span> does not occur</strong>.</p>
-<p>Notation:</p>
+<p>Factor out the constant <span class="math inline">\(a\)</span>.</p>
 <p><span class="math display">\[
-A^c
+= a \sum_x x \cdot P(X=x)
 \]</span></p>
-<p>Probability rule:</p>
+<p>Recognize that the remaining sum is the definition of <span class="math inline">\(E[X]\)</span>.</p>
 <p><span class="math display">\[
-P(A^c) = 1 - P(A)
+E[aX] = a\cdot E[X]
 \]</span></p>
-<hr>
-</section>
-<section id="union-of-events" class="level5">
-<h5 class="anchored" data-anchor-id="union-of-events">Union of Events</h5>
-<p>The <strong>union</strong> of two events means <strong><span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> occurs (or both)</strong>.</p>
-<p>Notation:</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Theorem (Scaling of Variance)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\text{Var}(aX) = a^2 \cdot \text{Var}(X)\)</span> for any constant <span class="math inline">\(a\)</span> and random variable <span class="math inline">\(X\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
 <p><span class="math display">\[
-A \cup B
+\text{Var}(aX) = E[(aX)^2] - E[aX]^2
 \]</span></p>
-<p>Addition rule:</p>
+<p>Apply the scaling of expectation.</p>
 <p><span class="math display">\[
-P(A \cup B) = P(A) + P(B) - P(A \cap B)
+= E[a^2 X^2] - (a\cdot E[X])^2
 \]</span></p>
-<hr>
-</section>
-<section id="intersection-of-events" class="level5">
-<h5 class="anchored" data-anchor-id="intersection-of-events">Intersection of Events</h5>
-<p>The <strong>intersection</strong> means <strong>both events occur</strong>.</p>
-<p>Notation:</p>
 <p><span class="math display">\[
-A \cap B
+= a^2 \cdot E[X^2] - a^2 \cdot E[X]^2
 \]</span></p>
-<p>Example:</p>
-<ul>
-<li><span class="math inline">\(A =\)</span> roll an even number<br>
-</li>
-<li><span class="math inline">\(B =\)</span> roll greater than 3</li>
-</ul>
-<p>Then</p>
+<p>Factor out <span class="math inline">\(a^2\)</span>.</p>
 <p><span class="math display">\[
-A \cap B = \{4,6\}
+= a^2 (E[X^2] - E[X]^2)
 \]</span></p>
-<hr>
-</section>
-<section id="conditional-probability" class="level5">
-<h5 class="anchored" data-anchor-id="conditional-probability">Conditional Probability</h5>
-<p>The <strong>conditional probability</strong> of <span class="math inline">\(A\)</span> given <span class="math inline">\(B\)</span> is defined as</p>
+<p>Recognize the definition of variance.</p>
 <p><span class="math display">\[
-P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+\text{Var}(aX) = a^2 \cdot \text{Var}(X)
 \]</span></p>
-<p>provided that <span class="math inline">\(P(B) &gt; 0\)</span>.</p>
-<hr>
+</div>
+</div>
+</div>
 </section>
-<section id="independent-events" class="level5">
-<h5 class="anchored" data-anchor-id="independent-events">Independent Events</h5>
-<p>Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>independent</strong> if the occurrence of one does not affect the probability of the other.</p>
-<p>Definition:</p>
-<p><span class="math display">\[
-P(A \cap B) = P(A)P(B)
-\]</span></p>
-<p>Example:<br>
-Two separate coin flips.</p>
-<hr>
-</section>
-<section id="random-variable" class="level5">
-<h5 class="anchored" data-anchor-id="random-variable">Random Variable</h5>
-<p>A <strong>random variable</strong> is a function that assigns a <strong>numerical value to each outcome</strong> of an experiment.</p>
-<p>Types:</p>
-<ul>
-<li><strong>Discrete random variable:</strong> countable values</li>
-<li><strong>Continuous random variable:</strong> values in an interval</li>
-</ul>
-<p>Examples:</p>
-<ul>
-<li>Number of heads in three coin flips</li>
-<li>Time until a light bulb fails</li>
-</ul>
-<hr>
-</section>
-<section id="probability-distribution" class="level5">
-<h5 class="anchored" data-anchor-id="probability-distribution">Probability Distribution</h5>
-<p>A <strong>probability distribution</strong> describes how probabilities are assigned to the values of a random variable.</p>
-<p>Types:</p>
-<ul>
-<li><strong>PMF (Probability Mass Function)</strong> for discrete variables</li>
-<li><strong>PDF (Probability Density Function)</strong> for continuous variables</li>
-</ul>
-<hr>
-</section>
-<section id="expected-value" class="level5">
-<h5 class="anchored" data-anchor-id="expected-value">Expected Value</h5>
-<p>The <strong>expected value</strong> (or mean) of a random variable represents the long-run average value.</p>
-<p>For a discrete random variable:</p>
-<p><span class="math display">\[
-E[X] = \sum_x x P(X=x)
-\]</span></p>
-<hr>
-</section>
-<section id="variance" class="level5">
-<h5 class="anchored" data-anchor-id="variance">Variance</h5>
-<p>The <strong>variance</strong> measures the spread of a random variable around its expected value.</p>
-<p><span class="math display">\[
-\text{Var}(X) = E[(X - E[X])^2]
-\]</span></p>
-<hr>
-<hr>
-</section>
-</section>
-<section id="linearity-of-expectation" class="level3">
-<h3 class="anchored" data-anchor-id="linearity-of-expectation">Linearity of Expectation</h3>
-<section id="theorem." class="level5">
-<h5 class="anchored" data-anchor-id="theorem."><em>Theorem.</em></h5>
+<section id="linearity-of-expectation" class="level2">
+<h2 class="anchored" data-anchor-id="linearity-of-expectation">Linearity of Expectation</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><span class="math inline">\(E[X + Y] = E[X] + E[Y]\)</span> for any two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
-</section>
-<section id="proof." class="level5">
-<h5 class="anchored" data-anchor-id="proof."><em>Proof.</em></h5>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Start from the definition of expectation.</p>
 <p><span class="math display">\[
 E[Z] = \sum_z z\cdot P(Z=z)
 \]</span></p>
-<p>Now substitute <span class="math inline">\(X+Y\)</span> for <span class="math inline">\(Z\)</span>. <span class="math display">\[
+<p>Substitute <span class="math inline">\(X+Y\)</span> for <span class="math inline">\(Z\)</span>.</p>
+<p><span class="math display">\[
 E[X + Y] = \sum_x \sum_y (x+y) \cdot P(X=x \cap Y=y)
 \]</span></p>
+<p>Distribute the sum.</p>
 <p><span class="math display">\[
 E[X + Y] = \sum_x \sum_y x \cdot P(X=x \cap Y=y) + \sum_x \sum_y y \cdot P(X=x \cap Y=y)
 \]</span></p>
+<p>Marginalize out the other variable in each term.</p>
 <p><span class="math display">\[
 E[X + Y] = \sum_x x \cdot P(X=x) + \sum_y y \cdot P(Y=y)
 \]</span></p>
+<p>Recognize both sums as expectations.</p>
 <p><span class="math display">\[
 E[X + Y] = E[X] + E[Y]
 \]</span></p>
-<hr>
-<hr>
+</div>
+</div>
+</div>
 </section>
-</section>
-<section id="linearity-of-variance" class="level3">
-<h3 class="anchored" data-anchor-id="linearity-of-variance">Linearity of Variance</h3>
-<section id="lemma-i." class="level5">
-<h5 class="anchored" data-anchor-id="lemma-i."><em>Lemma I</em>.</h5>
+<section id="linearity-of-variance" class="level2">
+<h2 class="anchored" data-anchor-id="linearity-of-variance">Linearity of Variance</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Lemma I
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><span class="math display">\[
 \text{Var}(X) = E[X^2] - E[X]^2
 \]</span></p>
-</section>
-<section id="proof-for-lemma-i." class="level5">
-<h5 class="anchored" data-anchor-id="proof-for-lemma-i."><em>Proof for Lemma I</em>.</h5>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof for Lemma I
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Start from the definition of variance.</p>
 <p><span class="math display">\[
 \text{Var}(X) = E[(X - E[X])^2]
-\]</span> Let <span class="math inline">\(\mu = E[X]\)</span> <span class="math display">\[
+\]</span></p>
+<p>Let <span class="math inline">\(\mu = E[X]\)</span> for convenience.</p>
+<p><span class="math display">\[
 = E[(X - \mu)^2]
-\]</span> <span class="math display">\[
+\]</span></p>
+<p>Expand the square.</p>
+<p><span class="math display">\[
 = E[X^2 - 2\mu\cdot X + \mu^2]
-\]</span> By <strong>linearity of expectation</strong> <span class="math display">\[
+\]</span></p>
+<p>Apply <strong>linearity of expectation</strong>.</p>
+<p><span class="math display">\[
 = E[X^2] + E[-2\mu\cdot X] + E[\mu^2]
-\]</span> Note that <span class="math inline">\(\mu\)</span> is already the expectation and so taking the expectation of expectation will not change the value. <span class="math display">\[
+\]</span></p>
+<p>Note that <span class="math inline">\(\mu\)</span> is already the expectation and so taking the expectation of expectation will not change the value.</p>
+<p><span class="math display">\[
 = E[X^2] -2\mu\cdot E[X] + \mu^2
-\]</span> Now substitute back in <span class="math inline">\(E[X]\)</span> for <span class="math inline">\(\mu\)</span>. <span class="math display">\[
+\]</span></p>
+<p>Substitute back in <span class="math inline">\(E[X]\)</span> for <span class="math inline">\(\mu\)</span>.</p>
+<p><span class="math display">\[
 = E[X^2] -2\cdot E[X]\cdot E[X] + E[X]^2
-\]</span> <span class="math display">\[
+\]</span></p>
+<p>Combine like terms.</p>
+<p><span class="math display">\[
 = E[X^2] -2\cdot E[X]^2 + E[X]^2
-\]</span> <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \text{Var}(X) = E[X^2] - E[X]^2
 \]</span></p>
-<hr>
-</section>
-<section id="lemma-ii." class="level5">
-<h5 class="anchored" data-anchor-id="lemma-ii."><em>Lemma II</em>.</h5>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Lemma II
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><span class="math display">\[
 E[X\cdot Y] = E[X]\cdot E[Y] \text{ for any two independent random variables } X \text{ and } Y
 \]</span></p>
-</section>
-<section id="proof-for-lemma-ii." class="level5">
-<h5 class="anchored" data-anchor-id="proof-for-lemma-ii."><em>Proof for Lemma II</em>.</h5>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof for Lemma II
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Start from the definition of expectation.</p>
 <p><span class="math display">\[
 E[Z] = \sum_z z\cdot P(Z=z)
-\]</span> Now substitute <span class="math inline">\(X\cdot Y\)</span> for <span class="math inline">\(Z\)</span>. <span class="math display">\[
+\]</span></p>
+<p>Substitute <span class="math inline">\(X\cdot Y\)</span> for <span class="math inline">\(Z\)</span>.</p>
+<p><span class="math display">\[
 E[X\cdot Y] = \sum_x \sum_y x\cdot y\cdot P(X=x \cap Y=y)
-\]</span> Since <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent <span class="math inline">\(P(X=x \cap Y=y) = P(X=x)\cdot P(Y=y)\)</span> <span class="math display">\[
+\]</span></p>
+<p>Since <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, <span class="math inline">\(P(X=x \cap Y=y) = P(X=x)\cdot P(Y=y)\)</span>.</p>
+<p><span class="math display">\[
 = \sum_x \sum_y x\cdot y\cdot P(X=x)\cdot P(Y=y)
-\]</span> <span class="math display">\[
+\]</span></p>
+<p>Factor out each variable’s terms into separate sums.</p>
+<p><span class="math display">\[
 = \sum_x x\cdot P(X=x) \times \sum_y y\cdot P(Y=y)
-\]</span> Realize that the components are expectations. <span class="math display">\[
+\]</span></p>
+<p>Recognize that the components are expectations.</p>
+<p><span class="math display">\[
 E[X\cdot Y] = E[X]\cdot E[Y]
 \]</span></p>
-<hr>
-</section>
-<section id="theorem.-1" class="level5">
-<h5 class="anchored" data-anchor-id="theorem.-1"><em>Theorem.</em></h5>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><span class="math inline">\(\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)\)</span> for any two <em>independent</em> random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
-</section>
-<section id="proof.-1" class="level5">
-<h5 class="anchored" data-anchor-id="proof.-1"><em>Proof</em>.</h5>
-<p>Following from <strong>Lemma I</strong>. <span class="math display">\[
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Start from <strong>Lemma I</strong>.</p>
+<p><span class="math display">\[
 \text{Var}(Z) = E[Z^2] - E[Z]^2
-\]</span> Now substitute <span class="math inline">\(X+Y\)</span> for <span class="math inline">\(Z\)</span>. <span class="math display">\[
-\text{Var}(X + Y) = E[(X + Y)^2] - E[X+Y]^2
-\]</span> Apply <strong>linearity of expectation</strong>. <span class="math display">\[
-= E[X^2 + 2\cdot XY + Y^2] - (E[X] + E[Y])^2
-\]</span> <span class="math display">\[
-= E[X^2] + 2\cdot E[XY] + E[Y^2] - (E[X] + E[Y])^2
-\]</span> <span class="math display">\[
-= E[X^2] + 2\cdot E[XY] + E[Y^2] - (E[X]^2 + 2\cdot E[X]\cdot E[Y] + E[Y]^2)
-\]</span> <span class="math display">\[
-= E[X^2] + 2\cdot E[XY] + E[Y^2] - E[X]^2 - 2\cdot E[X]\cdot E[Y] - E[Y]^2
-\]</span> Following from <strong>Lemma II</strong>. <span class="math display">\[
-= E[X^2] + 2\cdot E[X]\cdot E[Y] + E[Y^2] - E[X]^2 - 2\cdot E[X]\cdot E[Y] - E[Y]^2
-\]</span> <span class="math display">\[
-= E[X^2] + E[Y^2] - E[X]^2 - E[Y]^2
-\]</span> <span class="math display">\[
-= (E[X^2] - E[X]^2) + (E[Y^2]- E[Y]^2)
 \]</span></p>
-<p><span class="math inline">\(\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)\)</span></p>
-
-
+<p>Substitute <span class="math inline">\(X+Y\)</span> for <span class="math inline">\(Z\)</span>.</p>
+<p><span class="math display">\[
+\text{Var}(X + Y) = E[(X + Y)^2] - E[X+Y]^2
+\]</span></p>
+<p>Expand the square and apply <strong>linearity of expectation</strong>.</p>
+<p><span class="math display">\[
+= E[X^2 + 2\cdot XY + Y^2] - (E[X] + E[Y])^2
+\]</span></p>
+<p><span class="math display">\[
+= E[X^2] + 2\cdot E[XY] + E[Y^2] - (E[X]^2 + 2\cdot E[X]\cdot E[Y] + E[Y]^2)
+\]</span></p>
+<p>Distribute the negative sign.</p>
+<p><span class="math display">\[
+= E[X^2] + 2\cdot E[XY] + E[Y^2] - E[X]^2 - 2\cdot E[X]\cdot E[Y] - E[Y]^2
+\]</span></p>
+<p>Apply <strong>Lemma II</strong> to replace <span class="math inline">\(E[XY]\)</span> with <span class="math inline">\(E[X]\cdot E[Y]\)</span>.</p>
+<p><span class="math display">\[
+= E[X^2] + 2\cdot E[X]\cdot E[Y] + E[Y^2] - E[X]^2 - 2\cdot E[X]\cdot E[Y] - E[Y]^2
+\]</span></p>
+<p>Cancel the <span class="math inline">\(2\cdot E[X]\cdot E[Y]\)</span> terms and regroup.</p>
+<p><span class="math display">\[
+= (E[X^2] - E[X]^2) + (E[Y^2] - E[Y]^2)
+\]</span></p>
+<p>Recognize each group as a variance by <strong>Lemma I</strong>.</p>
+<p><span class="math display">\[
+\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
+<section id="indicator-random-variables" class="level2">
+<h2 class="anchored" data-anchor-id="indicator-random-variables">Indicator Random Variables</h2>
+<p>An <strong>indicator random variable</strong> for an event <span class="math inline">\(A\)</span> is defined as</p>
+<p><span class="math display">\[
+X_A = \begin{cases} 1 &amp; \text{if } A \text{ occurs} \\ 0 &amp; \text{otherwise} \end{cases}
+\]</span></p>
+<p>A key property is that the expectation of an indicator equals the probability of the event:</p>
+<p><span class="math display">\[
+E[X_A] = P(A)
+\]</span></p>
+<p>This is powerful because many quantities in randomized algorithms can be expressed as a <em>sum of indicators</em>. Combined with linearity of expectation, this lets us compute expectations without worrying about dependencies between events.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example: Expected Comparisons in Randomized QuickSort
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X_{ij}\)</span> be the indicator that elements <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are compared during the algorithm. The total number of comparisons is <span class="math inline">\(X = \sum_{i &lt; j} X_{ij}\)</span>. By linearity of expectation:</p>
+<p><span class="math display">\[
+E[X] = \sum_{i &lt; j} E[X_{ij}] = \sum_{i &lt; j} P(i \text{ and } j \text{ are compared})
+\]</span></p>
+<p>This reduces a complicated random variable to a sum of probabilities — no independence needed.</p>
+</div>
+</div>
+</section>
+<section id="union-bound" class="level2">
+<h2 class="anchored" data-anchor-id="union-bound">Union Bound</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Theorem (Boole’s Inequality)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For any events <span class="math inline">\(A_1, A_2, \ldots, A_n\)</span>:</p>
+<p><span class="math display">\[
+P\left(\bigcup_{i=1}^{n} A_i\right) \le \sum_{i=1}^{n} P(A_i)
+\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>We prove this by induction on <span class="math inline">\(n\)</span>.</p>
+<p><strong>Base case</strong> (<span class="math inline">\(n = 1\)</span>): <span class="math inline">\(P(A_1) \le P(A_1)\)</span>. Trivially true.</p>
+<p><strong>Inductive step</strong>: Assume the bound holds for <span class="math inline">\(n-1\)</span> events. For <span class="math inline">\(n\)</span> events, use the addition rule:</p>
+<p><span class="math display">\[
+P\left(\bigcup_{i=1}^{n} A_i\right) = P\left(\bigcup_{i=1}^{n-1} A_i\right) + P(A_n) - P\left(\left(\bigcup_{i=1}^{n-1} A_i\right) \cap A_n\right)
+\]</span></p>
+<p>Since probabilities are non-negative, drop the subtracted term.</p>
+<p><span class="math display">\[
+\le P\left(\bigcup_{i=1}^{n-1} A_i\right) + P(A_n)
+\]</span></p>
+<p>Apply the inductive hypothesis.</p>
+<p><span class="math display">\[
+\le \sum_{i=1}^{n-1} P(A_i) + P(A_n) = \sum_{i=1}^{n} P(A_i)
+\]</span></p>
+</div>
+</div>
+</div>
+<p>The union bound is often used to bound the overall failure probability of a randomized algorithm. If step <span class="math inline">\(i\)</span> fails with probability <span class="math inline">\(p_i\)</span>, then the probability that <em>any</em> step fails is at most <span class="math inline">\(\sum p_i\)</span>.</p>
+</section>
+<section id="markovs-inequality" class="level2">
+<h2 class="anchored" data-anchor-id="markovs-inequality">Markov’s Inequality</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For a <strong>non-negative</strong> random variable <span class="math inline">\(X\)</span> and any <span class="math inline">\(a &gt; 0\)</span>:</p>
+<p><span class="math display">\[
+P(X \ge a) \le \frac{E[X]}{a}
+\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Start from the definition of expectation for a non-negative random variable.</p>
+<p><span class="math display">\[
+E[X] = \sum_x x \cdot P(X = x)
+\]</span></p>
+<p>Split the sum into values below <span class="math inline">\(a\)</span> and values at or above <span class="math inline">\(a\)</span>.</p>
+<p><span class="math display">\[
+= \sum_{x &lt; a} x \cdot P(X = x) + \sum_{x \ge a} x \cdot P(X = x)
+\]</span></p>
+<p>Drop the first sum (it is non-negative) and lower-bound <span class="math inline">\(x\)</span> by <span class="math inline">\(a\)</span> in the second.</p>
+<p><span class="math display">\[
+\ge \sum_{x \ge a} a \cdot P(X = x)
+\]</span></p>
+<p>Factor out <span class="math inline">\(a\)</span>.</p>
+<p><span class="math display">\[
+= a \sum_{x \ge a} P(X = x) = a \cdot P(X \ge a)
+\]</span></p>
+<p>Rearrange.</p>
+<p><span class="math display">\[
+P(X \ge a) \le \frac{E[X]}{a}
+\]</span></p>
+</div>
+</div>
+</div>
+<p>Markov’s inequality is loose but requires almost nothing — just non-negativity and a known expectation.</p>
+</section>
+<section id="chebyshevs-inequality" class="level2">
+<h2 class="anchored" data-anchor-id="chebyshevs-inequality">Chebyshev’s Inequality</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For any random variable <span class="math inline">\(X\)</span> with finite variance and any <span class="math inline">\(k &gt; 0\)</span>:</p>
+<p><span class="math display">\[
+P(|X - E[X]| \ge k) \le \frac{\text{Var}(X)}{k^2}
+\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Define <span class="math inline">\(Y = (X - E[X])^2\)</span>. Note that <span class="math inline">\(Y\)</span> is non-negative, and <span class="math inline">\(E[Y] = \text{Var}(X)\)</span>.</p>
+<p>Apply <strong>Markov’s inequality</strong> to <span class="math inline">\(Y\)</span> with threshold <span class="math inline">\(k^2\)</span>.</p>
+<p><span class="math display">\[
+P(Y \ge k^2) \le \frac{E[Y]}{k^2} = \frac{\text{Var}(X)}{k^2}
+\]</span></p>
+<p>Observe that <span class="math inline">\(Y \ge k^2\)</span> is equivalent to <span class="math inline">\((X - E[X])^2 \ge k^2\)</span>, which is equivalent to <span class="math inline">\(|X - E[X]| \ge k\)</span>.</p>
+<p><span class="math display">\[
+P(|X - E[X]| \ge k) \le \frac{\text{Var}(X)}{k^2}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="chernoff-bounds" class="level2">
+<h2 class="anchored" data-anchor-id="chernoff-bounds">Chernoff Bounds</h2>
+<p>Chernoff bounds give <strong>exponentially strong</strong> concentration for sums of independent random variables. Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be independent indicator random variables, and let <span class="math inline">\(X = \sum_{i=1}^{n} X_i\)</span> with <span class="math inline">\(\mu = E[X]\)</span>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Upper Tail</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Lower Tail</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">Combined</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>For any <span class="math inline">\(\delta &gt; 0\)</span>:</p>
+<p><span class="math display">\[
+P(X \ge (1 + \delta)\mu) \le \left(\frac{e^\delta}{(1+\delta)^{(1+\delta)}}\right)^\mu
+\]</span></p>
+<p><strong>Simplified</strong> (<span class="math inline">\(0 &lt; \delta \le 1\)</span>): <span class="math inline">\(\quad P(X \ge (1+\delta)\mu) \le e^{-\mu\delta^2/3}\)</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The key idea uses the <strong>moment generating function</strong> and <strong>Markov’s inequality</strong>.</p>
+<p>For any <span class="math inline">\(t &gt; 0\)</span>, the event <span class="math inline">\(X \ge a\)</span> is equivalent to <span class="math inline">\(e^{tX} \ge e^{ta}\)</span>.</p>
+<p>Apply Markov’s inequality.</p>
+<p><span class="math display">\[
+P(X \ge a) = P(e^{tX} \ge e^{ta}) \le \frac{E[e^{tX}]}{e^{ta}}
+\]</span></p>
+<p>Since the <span class="math inline">\(X_i\)</span> are independent, the MGF factors.</p>
+<p><span class="math display">\[
+E[e^{tX}] = \prod_{i=1}^{n} E[e^{tX_i}]
+\]</span></p>
+<p>For an indicator variable with <span class="math inline">\(P(X_i = 1) = p_i\)</span>:</p>
+<p><span class="math display">\[
+E[e^{tX_i}] = 1 + p_i(e^t - 1) \le e^{p_i(e^t - 1)}
+\]</span></p>
+<p>using the inequality <span class="math inline">\(1 + x \le e^x\)</span>.</p>
+<p><span class="math display">\[
+E[e^{tX}] \le e^{\mu(e^t - 1)}
+\]</span></p>
+<p>Substitute <span class="math inline">\(a = (1+\delta)\mu\)</span> and optimize over <span class="math inline">\(t\)</span> by setting <span class="math inline">\(t = \ln(1+\delta)\)</span>.</p>
+<p><span class="math display">\[
+P(X \ge (1+\delta)\mu) \le \frac{e^{\mu(e^{\ln(1+\delta)} - 1)}}{e^{(1+\delta)\mu\ln(1+\delta)}} = \left(\frac{e^\delta}{(1+\delta)^{(1+\delta)}}\right)^\mu
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>For <span class="math inline">\(0 &lt; \delta &lt; 1\)</span>:</p>
+<p><span class="math display">\[
+P(X \le (1 - \delta)\mu) \le \left(\frac{e^{-\delta}}{(1-\delta)^{(1-\delta)}}\right)^\mu
+\]</span></p>
+<p><strong>Simplified</strong> (<span class="math inline">\(0 &lt; \delta &lt; 1\)</span>): <span class="math inline">\(\quad P(X \le (1-\delta)\mu) \le e^{-\mu\delta^2/2}\)</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The argument mirrors the upper tail, but with <span class="math inline">\(t &lt; 0\)</span>.</p>
+<p>For any <span class="math inline">\(t &lt; 0\)</span>, the event <span class="math inline">\(X \le a\)</span> is equivalent to <span class="math inline">\(e^{tX} \ge e^{ta}\)</span> (the inequality flips because <span class="math inline">\(t\)</span> is negative).</p>
+<p>Apply Markov’s inequality.</p>
+<p><span class="math display">\[
+P(X \le a) = P(e^{tX} \ge e^{ta}) \le \frac{E[e^{tX}]}{e^{ta}}
+\]</span></p>
+<p>The MGF bound is the same as before since it holds for all <span class="math inline">\(t\)</span>.</p>
+<p><span class="math display">\[
+E[e^{tX}] \le e^{\mu(e^t - 1)}
+\]</span></p>
+<p>Substitute <span class="math inline">\(a = (1-\delta)\mu\)</span> and optimize over <span class="math inline">\(t\)</span> by setting <span class="math inline">\(t = \ln(1-\delta)\)</span> (which is negative for <span class="math inline">\(0 &lt; \delta &lt; 1\)</span>).</p>
+<p><span class="math display">\[
+P(X \le (1-\delta)\mu) \le \frac{e^{\mu(e^{\ln(1-\delta)} - 1)}}{e^{(1-\delta)\mu\ln(1-\delta)}} = \left(\frac{e^{-\delta}}{(1-\delta)^{(1-\delta)}}\right)^\mu
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>For <span class="math inline">\(0 &lt; \delta \le 1\)</span>:</p>
+<p><span class="math display">\[
+P(|X - \mu| \ge \delta\mu) \le 2e^{-\mu\delta^2/3}
+\]</span></p>
+<p>This is the most commonly used form in practice — it bounds deviation in either direction.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof Sketch
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The event <span class="math inline">\(|X - \mu| \ge \delta\mu\)</span> means either <span class="math inline">\(X \ge (1+\delta)\mu\)</span> or <span class="math inline">\(X \le (1-\delta)\mu\)</span>.</p>
+<p>Apply the <strong>union bound</strong>.</p>
+<p><span class="math display">\[
+P(|X - \mu| \ge \delta\mu) \le P(X \ge (1+\delta)\mu) + P(X \le (1-\delta)\mu)
+\]</span></p>
+<p>Apply the simplified upper and lower tail bounds.</p>
+<p><span class="math display">\[
+\le e^{-\mu\delta^2/3} + e^{-\mu\delta^2/2}
+\]</span></p>
+<p>Since <span class="math inline">\(e^{-\mu\delta^2/2} \le e^{-\mu\delta^2/3}\)</span> for <span class="math inline">\(\mu, \delta &gt; 0\)</span>:</p>
+<p><span class="math display">\[
+\le 2e^{-\mu\delta^2/3}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
 </section>
 </section>
 

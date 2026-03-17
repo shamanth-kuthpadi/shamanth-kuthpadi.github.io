@@ -1,5 +1,5 @@
 ---
-title: "just a compilation of my academic and personal writing"
+title: "compilation of my academic and personal writing"
 listing:
   contents: posts
   sort: "date desc"
@@ -10,5 +10,3 @@ listing:
 page-layout: full
 title-block-banner: false
 ---
-
-Still updating this but a lot more to come so stay tuned!
