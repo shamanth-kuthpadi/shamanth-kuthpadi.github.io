@@ -10,3 +10,5 @@ listing:
 page-layout: full
 title-block-banner: false
 ---
+
+I aim to publish at least one post every two weeks. If you find a post helpful, please like or comment so I know what resonates. Most posts will cover technical concepts, though I occasionally like to delve into my philosophical interests.

@@ -9,6 +9,15 @@ title-block-banner: true
 
 page-layout: article
 
+# Comments via Hypothesis
+comments:
+  hypothesis: true
+
+# Like button script
+include-after-body:
+  - text: |
+      <script src="/likes.js"></script>
+
 # execute:
 #   enabled: true
 # format:

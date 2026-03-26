@@ -106,3 +106,38 @@ section > h3 {
 #hero-heading {
   margin-bottom: 1.5rem;
 }
+
+// Like button
+.like-button-container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: 1.5px solid rgba(var(--bs-body-color-rgb), 0.2);
+  border-radius: 20px;
+  padding: 0.35rem 1rem;
+  font-size: 0.95rem;
+  color: var(--bs-body-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.like-btn:hover:not(:disabled) {
+  border-color: #e25555;
+  color: #e25555;
+}
+
+.like-btn.liked {
+  color: #e25555;
+  border-color: #e25555;
+  cursor: default;
+}
+
+.like-btn:disabled {
+  opacity: 0.85;
+}
