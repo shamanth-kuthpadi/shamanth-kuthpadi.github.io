@@ -72,7 +72,7 @@ I am also a part-time research intern under the supervision of [Dr. Daniel D. Co
 
 ---
 
-### Selected Publications & Current Research
+<!-- ### Selected Publications & Current Research
 
 ::: {.publication}
 [**Hallucination Detection-Guided Preference Optimization for Clinical Summarization**]{.pub-title}\
@@ -90,4 +90,4 @@ I am also a part-time research intern under the supervision of [Dr. Daniel D. Co
 [**Artificial Intelligence and Discovery Automation: Path to Democratizing Science**]{.pub-title}\
 [J. Gormley, D. Corkill, E. Hinderer, **S. K. Seethakantha**, T. Zisk]{.pub-authors}\
 [Submitted to International Conference on Systems Biology (ICSB)]{.pub-venue}
-:::
+::: -->
