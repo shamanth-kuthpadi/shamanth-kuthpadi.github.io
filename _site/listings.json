@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/2026-05-05-bootstrapping/index.html",
       "/posts/2026-03-16-probability-refresher/index.html",
       "/posts/2026-01-12-audio-streaming/index.html"
     ]

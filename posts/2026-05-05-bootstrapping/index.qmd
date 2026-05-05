@@ -1,0 +1,57 @@
+---
+title: "Bootstrapping for Evaluation"
+author: "Shamanth Kuthpadi S."
+date: "2026-05-05"
+categories: [machine learning, statistics]
+image: "bootstrap.png"
+draft: false
+---
+
+# Bootstrapping for Evaluation
+
+Typically, in statistics and ML, we work with a sample and try to say something about a much larger population. Whenever we compute a number from that sample — the mean, the median, model accuracy, an F1 score — that number is an estimate (since we don't actually have access to the true population). However, that estimate is just one guess, and it's useful to understand how *uncertain* we are about it. *If we had collected a different sample, would we have gotten a different estimate? If so, how different?*
+
+For some statistics, mathematicians worked out clever formulas long ago. The sample mean has its famous "standard error" — you can compute it from the standard deviation and the sample size, and the Central Limit Theorem gives you a confidence interval almost for free. But what about the median? The 90th percentile? The correlation coefficient between two variables? Your model's AUC? The difference in F1 scores between two competing models? Understanding uncertainties about arbitrary statistics that we can estimate from our sample is what underpins the principles of *bootstrapping*.
+
+In 1979, a statistician named Bradley Efron proposed this idea. In particular, we take our dataset $D$ of size $n$ and draw a new sample of size $n$ from $D$ with replacement — this is what is known as a *bootstrapped* sample $D_b$. We then repeat this procedure many times. Each time, we compute the statistic of interest from $D_b$. From here, we can obtain a distribution of these estimates and say something about the uncertainty.
+
+If our sample is reasonably representative, the variability we see across bootstrap samples is a good approximation of the variability we would see across fresh samples from the real population. As you may have already conjectured, we're not learning about the true population mean (our sample mean is fixed) — instead, we're learning how much that mean might vary if we had collected different data. As a result, it's worth noting that bootstrapping does not fix bias in our sample. If our sample is skewed, each bootstrapped sample will also be skewed. It estimates spread, not truth.
+
+---
+
+#### Why ML evaluation needs bootstrap
+
+Classical statistics often deals with simple statistics — means, proportions, correlations — that have well-studied formulas. ML evaluation deals with metrics that are more arbitrary:
+
+* AUC-ROC is an integral over a curve traced out by sorting predictions.
+* F1 score is a harmonic mean of precision and recall, both of which are themselves ratios that depend on classification thresholds.
+* BLEU, ROUGE, CIDEr for language — complicated functions of n-gram overlaps.
+* Calibration error, mean average precision, NDCG for ranking.
+
+For most of these metrics, there's no mathematically clean formula for the standard error or variance. Trying to derive one analytically is either intractable or relies on assumptions (like independence between predictions) that don’t hold. So bootstrap is often the only practical way to get an uncertainty estimate.
+
+A very common question in an ML setting is: *Suppose Model A scores 87.2% and Model B scores 87.5% on the same test set. Is B actually better, or is it noise?*
+
+We can't just compare the two numbers since we haven't accounted for variance — this is exactly where bootstrapping comes in.
+
+---
+
+#### Bagging: bootstrap as a model-building tool, not just an evaluation tool
+
+Everything we've discussed so far uses bootstrap to evaluate a fixed model. But there's another foundational use in modern ML: using bootstrap to build models.
+
+The technique is called bagging — short for **B**ootstrap **Agg**regat**ing**. The idea: instead of training one model on your training set, you draw $B$ bootstrap samples, train a separate model on each, and average their predictions (or take a majority vote for classification).
+
+This helps because each model sees a slightly different version of the data, so each makes slightly different mistakes. When we average them, the hope is that the noise cancels out and the true patterns remain.
+
+* Random forests, one of the most widely used ML algorithms, are bagging applied to decision trees. The "forest" is literally a collection of trees, each trained on a different bootstrap sample of the data. When introduced in the early 2000s, it dominated benchmark after benchmark and remains a go-to technique today.
+
+---
+
+### Limitations and caveats of bootstrapping
+
+* **Bootstrap assumes your data points are independent.** If the test set has time-series structure (today's stock price depends on yesterday's) or grouped structure (multiple images of the same patient, multiple sentences from the same document), naive bootstrap will give you confidence intervals that are too narrow — i.e., overconfident. The fix is block bootstrap (resampling contiguous chunks for time series) or cluster bootstrap (resampling whole groups rather than individual points).
+
+* **Bootstrap struggles with extreme statistics.** Things like the maximum, the minimum, or very high quantiles depend heavily on rare data points, and resampling cannot conjure rare events that weren't in your original data.
+
+* **Bootstrap can't account for bias.** If our dataset itself is not representative or if the model's we choose have intuitive bias, then bootstrap can't mitigate.
