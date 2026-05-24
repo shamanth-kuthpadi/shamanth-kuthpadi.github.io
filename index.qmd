@@ -21,7 +21,7 @@ about:
 :::{#hero-heading}
 
 **About Me**\
-I am a computer science graduate student at the [Manning College of Information and Computer Sciences](https://www.cics.umass.edu/) in UMass Amherst. I am fortunate enough to be advised by [Prof. Deepak Ganesan](https://people.cs.umass.edu/~dganesan/).
+I am a computer science graduate student (first year PhD) at the [Manning College of Information and Computer Sciences](https://www.cics.umass.edu/) in UMass Amherst. I am fortunate enough to be advised by [Prof. Deepak Ganesan](https://people.cs.umass.edu/~dganesan/).
 
 My research interests lie in developing end-to-end machine learning pipelines that can be leveraged for impactful advancements in healthcare. The hope is that, by doing so, I can help optimize healthcare outcomes and ultimately compute for the common good. I also have a keen interest in designing these ML pipelines in an explainable and interpretable
 way (whenever possible).
@@ -93,3 +93,11 @@ In the near past, I also enjoyed being a part-time research intern at [IOMICS Co
 [J. Gormley, D. Corkill, E. Hinderer, **S. K. Seethakantha**, T. Zisk]{.pub-authors}\
 [Submitted to International Conference on Systems Biology (ICSB)]{.pub-venue}
 ::: -->
+
+### Selected Publications & Current Research
+
+::: {.publication}
+[**VYRE: Low-Burden and Robust Oscillometric Ring-Based System for Frequent Blood Pressure Monitoring**]{.pub-title}\
+[A. Radmehr, **S.K. Seethakantha**, A. Aziz, Q.T. Tran, A. Nair, W. Saulnier, D. Ganesan, P. Nguyen]{.pub-authors}\
+[Accepted to SenSys26]{.pub-venue}
+:::
