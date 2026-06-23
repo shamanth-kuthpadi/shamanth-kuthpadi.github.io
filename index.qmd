@@ -35,7 +35,10 @@ In the near past, I also enjoyed being a part-time research intern at [IOMICS Co
 ### News
 ::: {.scrollable-news}
 ::: {.news-item}
-**January 2025**: VYRE paper was accepted to Sensys26.
+**June 2026**: Motion Robust Biosignal Monitoring paper accepted to Advanced Healthcare Materials.
+:::
+::: {.news-item}
+**January 2026**: VYRE paper was accepted to Sensys26.
 :::
 ::: {.news-item}
 **January 2025**: PhD mentor for COMPSCI 698DS.
@@ -99,5 +102,10 @@ In the near past, I also enjoyed being a part-time research intern at [IOMICS Co
 ::: {.publication}
 [**VYRE: Low-Burden and Robust Oscillometric Ring-Based System for Frequent Blood Pressure Monitoring**]{.pub-title}\
 [A. Radmehr, **S.K. Seethakantha**, A. Aziz, Q.T. Tran, A. Nair, W. Saulnier, D. Ganesan, P. Nguyen]{.pub-authors}\
-[Accepted to SenSys26]{.pub-venue}
+[ACM, SenSys26]{.pub-venue}
+:::
+::: {.publication}
+[**Self-Maintaining Electrode–Skin Interface for Motion-Robust Biosignal Monitoring**]{.pub-title}\
+[T.Q. Trung, **S.K. Seethakantha**, Z. Lei, A. Radmehr, P. Nguyen, D. Ganesan]{.pub-authors}\
+[Advanced Healthcare Materials]{.pub-venue}
 :::
